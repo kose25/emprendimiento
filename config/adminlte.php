@@ -290,11 +290,17 @@ return [
                 ],
             ],
         ], */
+        ['header' => 'USUARIOS'],
+        [
+            'text' => 'Gestionar Usuarios',
+            'url'  => '/usuario',
+            'icon' => 'fas fa-users',
+        ],
         ['header' => 'EMPRENDIMIENTOS'],
         [
             'text' => 'Ver',
             'url'  => '/emprendimiento',
-            //'icon' => 'fas fa-fw fa-user',
+            //'icon' => 'fas fa-users',
         ],
         [
             'text' => 'Crear',

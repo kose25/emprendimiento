@@ -6,6 +6,7 @@ use App\Http\Controllers\EmprendimientoController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EntidadController;
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::resource('emprendimiento', EmprendimientoController::class)->middleware('
 Route::resource('emprendedor', EmprendedorController::class)->middleware('auth');
 Route::resource('entidad', EntidadController::class)->middleware('auth');
 Route::resource('funcionario', FuncionarioController::class)->middleware('auth');
+Route::resource('usuario', UserController::class)->middleware('auth');
+Route::get('/user/{rol}', [App\Http\Controllers\UserController::class, 'profile'])->middleware('auth');
 //Auth::routes(['registrer'=>false, 'reset'=>false]);
 Auth::routes();
 
