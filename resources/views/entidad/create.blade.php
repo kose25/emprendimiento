@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+@section('title', 'Crear Entidad')
 
 @section('content')
 
-<div class="container">
-@include('layouts.menu')
+
 
     <h1>Crear Entidad</h1>
 
@@ -25,7 +25,6 @@
     </div>
 
 
-</div>
 
 
 @endsection

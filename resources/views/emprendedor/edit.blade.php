@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+@section('title', ' Editar Emprendedor')
 
 @section('content')
-<div class="container">
-@include('layouts.menu')
 
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -23,8 +22,6 @@
     </div>
 
 
-</div>
 
-</div>
 
 @endsection

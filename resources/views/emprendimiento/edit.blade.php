@@ -1,10 +1,11 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+@section('title', 'Editar Emprendimiento')
 
 @section('content')
 
-<div class="container">
 
-    @include('layouts.menu')
+
+    
     <h1>Editar Emprendimiento</h1>
 
 
@@ -23,9 +24,9 @@
             </div>
         </div>
     </div>
-</div>
 
-</div>
+
+
 
 @endsection
 

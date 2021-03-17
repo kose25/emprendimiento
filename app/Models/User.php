@@ -40,4 +40,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function adminlte_image()
+    {
+        //$foto=$this->foto;
+        return 'https://picsum.photos/300/300';
+    }
+
+    public function adminlte_desc()
+    {
+        return $this->rol;
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile/holaaa';
+    }
+
 }
