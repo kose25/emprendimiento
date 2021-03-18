@@ -118,6 +118,6 @@ class UserController extends Controller
                 break;
         }
 
-        return response()->json($datos);
+        return view('user.profile');
     }
 }
