@@ -1,6 +1,6 @@
 <div>
     <div class="my-2">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model="newPost">Que estas pensando?</textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost">Que estas pensando?</textarea>
         <div class="d-flex flex-row-reverse my-2">
             <button type="button" class="btn btn-primary" wire:click="addPost">Postear</button>
         </div>
@@ -14,7 +14,7 @@
                 <a href="#">{{Auth::user()->name}}</a>
                 <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
             </span>
-            <span class="description">{{ $post['created_at']}}</span>
+            <span class="description">{{ $post->created_at->diffForHumans()}}</span>
         </div>
         <!-- /.user-block -->
         <p>

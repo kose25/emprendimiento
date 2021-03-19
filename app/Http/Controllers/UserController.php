@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
 
 class UserController extends Controller
 {
@@ -117,6 +118,8 @@ class UserController extends Controller
                 $datos['emprendedor']=Auth::user();
                 break;
         }
+
+        //$posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
 
         return view('user.profile');
     }
