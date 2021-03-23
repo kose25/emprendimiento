@@ -36,6 +36,8 @@
 
 <div class="form-group row">
 
+@if(Auth::user()->rol!='emprendedor')
+
     <div class="col-md-4 py-2">
         <select name="lider" required class="custom-select">
             <option value="" disabled selected>Lider</option>
@@ -44,6 +46,11 @@
             @endforeach
         </select>
     </div>
+ @endif
+
+ @if(Auth::user()->rol=='emprendedor')
+ <input type="hidden" name="lider" value="{{Auth::user()->id}}">  
+ @endif 
 
     <div class="col-md-4 py-2">
         <input type="text" class="form-control" name="ciudad" value="{{ isset($emprendimiento->ciudad)?$emprendimiento->ciudad:'' }}" autofocus placeholder="Ciudad">
