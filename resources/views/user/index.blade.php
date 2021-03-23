@@ -10,9 +10,15 @@
 
 @section('content')
 
+@if(Session::has('mensaje'))
 
-
-
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ Session::get('mensaje') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 
 <h1>lista de Usuarios</h1>
 
@@ -23,19 +29,19 @@
     <div class="card-body">
 
         <div class="d-flex flex-row-reverse">
-        <div class="dropleft mb-4">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-plus"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{ url('/emprendedor/create') }}">Crear Emprendedor</a>
-                <a class="dropdown-item" href="{{ url('/entidad/create') }}">Crear Entidad</a>
-                <a class="dropdown-item" href="{{ url('/funcionario/create') }}">Crear Funcionario</a>
+            <div class="dropleft mb-4">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ url('/emprendedor/create') }}">Crear Emprendedor</a>
+                    <a class="dropdown-item" href="{{ url('/entidad/create') }}">Crear Entidad</a>
+                    <a class="dropdown-item" href="{{ url('/funcionario/create') }}">Crear Funcionario</a>
+                </div>
             </div>
         </div>
-        </div>
 
-        
+
 
         <table class="table table-striped table-bordered dt-responsive nowrap" id="example">
             <thead class="thead-light">

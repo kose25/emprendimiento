@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,7 +24,6 @@ class EmprendedorController extends Controller
         //
         $datos['emprendedores'] = DB::table('users')->where('rol', 'emprendedor')->paginate(20);
         return view('emprendedor.index', $datos);
-
     }
 
     /**
@@ -47,7 +47,7 @@ class EmprendedorController extends Controller
     {
         //
         $random = Str::random(8);
-        $pass= Hash::make($random);
+        $pass = Hash::make($random);
         $datosEmprendedor = request()->except('_token');
         $datosEmprendedor['password'] = $pass;
         $datosEmprendedor['rol'] = 'emprendedor';
@@ -58,13 +58,18 @@ class EmprendedorController extends Controller
         User::insert($datosEmprendedor);
         $datosEmprendedor['contaseña'] = $random;
         $correo = new CuentaMailable($random, $datosEmprendedor['email'], 'emprendedor');
-        Mail::to( $datosEmprendedor['email'])->send($correo);
+        Mail::to($datosEmprendedor['email'])->send($correo);
         //$id = DB::getPdo()->lastInsertId();;
 
 
         //return response()->json($id);
-        return redirect('emprendedor')->with('mensaje', 'Emprendedor creado con exito');
+        if (Auth::user()->rol == 'administrador') {
+            return redirect('usuario')->with('mensaje', 'Emprendedor creado con exito');
+        } else {
+            return redirect('emprendedor')->with('mensaje', 'Emprendedor creado con exito');
+        }
 
+        //return redirect('emprendedor')->with('mensaje', 'Emprendedor creado con exito');
     }
 
     /**
@@ -101,15 +106,22 @@ class EmprendedorController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $url = url()->previous();
         $datosEmprendedor = request()->except(['_token', '_method']);
         if ($request->hasFile('foto')) {
             $emprendedor = User::findOrFail($id);
             Storage::delete('public/' . $emprendedor->foto);
             $datosEmprendedor['foto'] = $request->file('foto')->store('uploads', 'public');
-        }        
+        }
         User::where('id', '=', $id)->update($datosEmprendedor);
-        return redirect('emprendedor');
-        //return response()->json($request->hasFile('foto'));
+        //return redirect('emprendedor');
+        //return response()->json($url);
+        if (Str::contains($url, 'usuario')) {
+            $result = 'usuario';
+        } else {
+            $result = 'emprendedor';
+        }
+        return redirect($result)->with('mensaje', 'Emprendedor editado con exito');
     }
 
     /**
@@ -126,6 +138,7 @@ class EmprendedorController extends Controller
             User::destroy($id);
         }
         User::destroy($id);
-        return redirect('emprendedor')->with('mensaje', 'emprendedor eliminado con exito');
+        //return redirect('emprendedor')->with('mensaje', 'emprendedor eliminado con exito');
+        return redirect()->back()->with('mensaje', 'Emprendedor eliminado con exito');
     }
 }

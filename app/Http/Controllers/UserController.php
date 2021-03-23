@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\FuncionarioEntidad;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -65,7 +67,25 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = User::findOrFail($id);
 
+        switch ($user->rol) {
+            case 'emprendedor':
+                $emprendedor = $user;
+                return view('emprendedor.edit', compact('emprendedor'));
+                break;
+
+            case 'entidad':
+                $entidad = $user;
+                return view('entidad.edit', compact('entidad'));
+                break;
+            case 'funcionario':
+                $funcionario = $user;
+                $entidades = DB::table('users')->where('rol', 'entidad')->get();
+                $entidadxd = FuncionarioEntidad::select('entidad')->where('funcionario', '=', $id)->value('entidad');
+                return view('funcionario.edit', compact('funcionario', 'entidades', 'entidadxd'));
+                break;
+        }
     }
 
     /**
@@ -100,22 +120,22 @@ class UserController extends Controller
         switch ($rol) {
             case 'administrador':
                 $view = 'user.profile';
-                $datos['administrador']=Auth::user();
+                $datos['administrador'] = Auth::user();
                 break;
 
             case 'funcionario':
                 $view = 'funcionario.edit';
-                $datos['funcionario']=Auth::user();
+                $datos['funcionario'] = Auth::user();
                 break;
 
             case 'entidad':
                 $view = 'entidad.edit';
-                $datos['entidad']=Auth::user();
+                $datos['entidad'] = Auth::user();
                 break;
 
             case 'emprendedor':
                 $view = 'emprendedor.edit';
-                $datos['emprendedor']=Auth::user();
+                $datos['emprendedor'] = Auth::user();
                 break;
         }
 

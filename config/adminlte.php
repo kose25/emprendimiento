@@ -293,40 +293,51 @@ return [
 
         [
             'header' => 'USUARIOS',
-            'can'  => 'admin-only',
+            'can'  => ['admin', 'funcionario', 'entidad'],
         ],
         [
             'text' => 'Gestionar Usuarios',
             'url'  => '/usuario',
             'icon' => 'fas fa-users',
-            'can'  => 'admin-only',
+            'can'  => ['admin', 'funcionario', 'entidad'],
         ],
 
 
 
-        ['header' => 'EMPRENDIMIENTOS'],
+        [
+            'header' => 'EMPRENDIMIENTO',
+            'can'  => 'emprendedor',
+        ],
         [
             'text' => 'Ver',
             'url'  => '/emprendimiento',
+            'can'  => 'emprendedor',
             //'icon' => 'fas fa-users',
         ],
         [
             'text' => 'Crear',
             'url'  => '/emprendimiento/create',
+            'can'  => 'emprendedor',
+
             //'icon' => 'fas fa-fw fa-lock',
         ],
-        ['header' => 'EMPRENDEDOR'],
+        [
+            'header' => 'EMPRENDEDOR',
+            'can'  => 'funcionario',
+        ],
         [
             'text' => 'Ver',
             'url'  => '/emprendedor',
+            'can'  => 'funcionario',
             //'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Crear',
             'url'  => '/emprendedor/create',
+            'can'  => 'funcionario',
             //'icon' => 'fas fa-fw fa-lock',
         ],
-        ['header' => 'ENTIDAD'],
+        /* ['header' => 'ENTIDAD'],
         [
             'text' => 'Ver',
             'url'  => '/entidad',
@@ -336,8 +347,8 @@ return [
             'text' => 'Crear',
             'url'  => '/entidad/create',
             //'icon' => 'fas fa-fw fa-lock',
-        ],
-        ['header' => 'FUNCIONARIOS'],
+        ], */
+        /* ['header' => 'FUNCIONARIOS'],
         [
             'text' => 'Ver',
             'url'  => '/funcionario',
@@ -347,7 +358,7 @@ return [
             'text' => 'Crear',
             'url'  => '/funcionario/create',
             //'icon' => 'fas fa-fw fa-lock',
-        ],
+        ], */
         ['header' => 'labels'],
         [
             'text'       => 'important',

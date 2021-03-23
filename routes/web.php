@@ -39,9 +39,14 @@ Route::get('/user/{rol}', [App\Http\Controllers\UserController::class, 'profile'
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [EmprendimientoController::class, 'index'])->name('home');
+//Route::get('/home', [EmprendimientoController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [EmprendimientoController::class, 'index'])->name('home');
+    //Route::get('/', [EmprendimientoController::class, 'index'])->name('home');
+    //return view('dashboard')->name('home');
+    /* Route::get('/', function () {
+        return view('dashboard')->name('home');
+    }); */
+    Route::view('/', 'dashboard');
 });

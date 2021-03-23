@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CuentaMailable;
 use App\Models\FuncionarioEntidad;
+use Illuminate\Support\Facades\Auth;
 
 class FuncionarioController extends Controller
 {
@@ -79,7 +80,13 @@ class FuncionarioController extends Controller
         $datosFuncionario['contaseña'] = $random;
         $correo = new CuentaMailable($random, $datosFuncionario['email'], 'funcionario');
         Mail::to($datosFuncionario['email'])->send($correo);
-        return redirect('funcionario')->with('mensaje', 'Funcionario creado con exito');
+
+        if (Auth::user()->rol == 'administrador') {
+            return redirect('usuario')->with('mensaje', 'Funcionario creado con exito');
+        } else {
+            return redirect('funcionario')->with('mensaje', 'Funcionario creado con exito');
+        }
+        //return redirect('funcionario')->with('mensaje', 'Funcionario creado con exito');
     }
 
     /**
@@ -141,7 +148,13 @@ class FuncionarioController extends Controller
         User::where('id', '=', $id)->update($datosFuncionario);
 
         //return response()->json($relationid);
-        return redirect('funcionario');
+        $url = url()->previous();
+        if (Str::contains($url, 'usuario')) {
+            $result = 'usuario';
+        } else {
+            $result = 'funcionario';
+        }
+        return redirect($result)->with('mensaje', 'Funcionario editado con exito');
     }
 
     /**
@@ -160,8 +173,8 @@ class FuncionarioController extends Controller
             User::destroy($id);
         }
         //User::destroy($id);
-        return redirect('funcionario')->with('mensaje', 'funcionario eliminado con exito');
+        //return redirect('funcionario')->with('mensaje', 'funcionario eliminado con exito');
         //return response()->json($relation['id']);
-
+        return redirect()->back()->with('mensaje', 'Funcionario Eliminado con exito');
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Mail\CuentaMailable;
+use Illuminate\Support\Facades\Auth;
 
 class EntidadController extends Controller
 {
@@ -46,7 +47,7 @@ class EntidadController extends Controller
     {
         //
         $random = Str::random(8);
-        $pass= Hash::make($random);
+        $pass = Hash::make($random);
         $datosEntidad = request()->except('_token');
         $datosEntidad['password'] = $pass;
         $datosEntidad['rol'] = 'entidad';
@@ -57,11 +58,16 @@ class EntidadController extends Controller
         User::insert($datosEntidad);
         $datosEntidad['contaseña'] = $random;
         $correo = new CuentaMailable($random, $datosEntidad['email'], 'entidad');
-        Mail::to( $datosEntidad['email'])->send($correo);
+        Mail::to($datosEntidad['email'])->send($correo);
 
 
         //return response()->json($datosEntidad);
-        return redirect('entidad')->with('mensaje', 'Entidad creada con exito');
+        if (Auth::user()->rol == 'administrador') {
+            return redirect('usuario')->with('mensaje', 'Entidad creada con exito');
+        } else {
+            return redirect('entidad')->with('mensaje', 'Entidad creada con exito');
+        }
+        //return redirect('entidad')->with('mensaje', 'Entidad creada con exito');
     }
 
     /**
@@ -105,8 +111,13 @@ class EntidadController extends Controller
             $datosEntidad['foto'] = $request->file('foto')->store('uploads', 'public');
         }
         User::where('id', '=', $id)->update($datosEntidad);
-        return redirect('entidad');
-
+        $url = url()->previous();
+        if (Str::contains($url, 'usuario')) {
+            $result = 'usuario';
+        } else {
+            $result = 'entidad';
+        }
+        return redirect($result)->with('mensaje', 'Entidad editada con exito');
     }
 
     /**
@@ -123,6 +134,7 @@ class EntidadController extends Controller
             User::destroy($id);
         }
         User::destroy($id);
-        return redirect('entidad')->with('mensaje', 'entidad eliminado con exito');
+        //return redirect('entidad')->with('mensaje', 'entidad eliminado con exito');
+        return redirect()->back()->with('mensaje', 'Entidad eliminada con exito');
     }
 }
