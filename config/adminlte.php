@@ -290,12 +290,20 @@ return [
                 ],
             ],
         ], */
-        ['header' => 'USUARIOS'],
+
+        [
+            'header' => 'USUARIOS',
+            'can'  => 'admin-only',
+        ],
         [
             'text' => 'Gestionar Usuarios',
             'url'  => '/usuario',
             'icon' => 'fas fa-users',
+            'can'  => 'admin-only',
         ],
+
+
+
         ['header' => 'EMPRENDIMIENTOS'],
         [
             'text' => 'Ver',
