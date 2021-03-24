@@ -23,15 +23,44 @@
 
         <p>
             <!-- <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a> -->
-            <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
+            <button type="button" class="btn btn-link" wire:click="hitLike()"><i class="{{$likeicon}}"></i> Like</button>
+            <!-- <a href="#" class="link-black text-sm"><i class="{{$likeicon}}"></i> Like</a> -->
             <span class="float-right">
                 <a href="#" class="link-black text-sm">
-                    <i class="far fa-comments mr-1"></i> Comments (5)
+                    <i class="far fa-comments mr-1"></i> Comments ({{count($post->comments)}})
                 </a>
             </span>
         </p>
 
-        <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+        <div class="card-footer card-comments ">
+            @foreach($post->comments as $comment)
+            <div class="card-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="https://picsum.photos/128/128" alt="User Image">
+
+                <div class="comment-text">
+                    <span class="username">
+                        {{$comment->user->name}}
+                        <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
+                    </span><!-- /.username -->
+                    {{$comment->content}}
+                </div>
+                <!-- /.comment-text -->
+
+            </div>
+            @endforeach
+        </div>
+        <div class="card-footer">
+            <div>
+                <img class="img-fluid img-circle img-sm" src="https://picsum.photos/128/128" alt="Alt Text">
+                <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push">
+                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment" wire:keydown.enter="addComment({{ $post->id }}, {{ $loop->index }})" wire:model.lazy="newComment">
+                </div>
+            </div>
+        </div>
+
+        <!-- <input class="form-control form-control-sm" type="text" placeholder="Type a comment"> -->
     </div>
     <!-- /.post -->
     <hr>
