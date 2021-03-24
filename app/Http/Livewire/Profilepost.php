@@ -67,7 +67,7 @@ class Profilepost extends Component
     public function hitLike($currentPost)
     {
         if (Like::where('post_id', $currentPost)->where('user_id', Auth::user()->id)->count() > 0) {
-            Like::where('post_id', $currentPost)->delete();
+            Like::where('post_id', $currentPost)->where('user_id', Auth::user()->id)->delete();
         } else {
             Like::create(['user_id' => Auth::user()->id, 'post_id' => $currentPost]);
         }
