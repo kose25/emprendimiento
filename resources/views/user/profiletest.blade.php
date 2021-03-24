@@ -18,9 +18,9 @@
                     <img class="profile-user-img img-fluid img-circle" src="https://picsum.photos/300/300" alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
+                <h3 class="profile-username text-center">{{$user->name}}</h3>
 
-                <p class="text-muted text-center">{{Str::ucfirst(Auth::user()->rol)}}</p>
+                <p class="text-muted text-center">{{Str::ucfirst($user->rol)}}</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
@@ -31,6 +31,9 @@
                     </li>
                     <li class="list-group-item">
                         <b>Friends</b> <a class="float-right">13,287</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Publicaciones</b> <a class="float-right">{{count($user->posts)}}</a>
                     </li>
                 </ul>
 
@@ -94,7 +97,7 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
-                        <livewire:profilepost/>
+                        <livewire:profilepost :user="$user"/>
 
                         <!-- Post -->
                         <div class="post">
@@ -212,9 +215,9 @@
                     <div class="tab-pane" id="timeline">
 
                     <div class="container-fluid">
-                    <b>Nombre:</b> <p>{{Auth::user()->name}}</p>
-                    <b>Correo:</b> <p>{{Auth::user()->email}}</p>
-                    <b>Cargo:</b> <p>{{Auth::user()->rol}}</p>
+                    <b>Nombre:</b> <p>{{$user->name}}</p>
+                    <b>Correo:</b> <p>{{$user->email}}</p>
+                    <b>Cargo:</b> <p>{{$user->rol}}</p>
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Title</h5>

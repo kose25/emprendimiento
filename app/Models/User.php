@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return 'user/'.$this->rol;
+        return 'usuario/'.$this->id;
     }
 
     public function posts()

@@ -8,9 +8,12 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Like;
+//use Livewire\WithPagination;
 
 class Profilepost extends Component
 {
+
+    //use WithPagination;
 
     public $posts;
 
@@ -19,6 +22,8 @@ class Profilepost extends Component
     public $newPost;
 
     public $newComment;
+
+    public $user;
 
     //public $currentPost;
 
@@ -72,7 +77,14 @@ class Profilepost extends Component
 
     public function render()
     {
-        $this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
+        if (is_null($this->user)) {
+            $this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
+        } else {
+            $this->posts= Post::where('usuario', $this->user->id)->orderByDesc('id')->get();
+        }
+
+
+        //$this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
         return view('livewire.profilepost');
     }
 }

@@ -1,17 +1,21 @@
-<div>
+<div wire:poll.10000ms>
+
+    @if(isset($user) && $user->id==Auth::user()->id)
     <div class="my-2">
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost">Que estas pensando?</textarea>
         <div class="d-flex flex-row-reverse my-2">
             <button type="button" class="btn btn-primary" wire:click="addPost">Postear</button>
         </div>
     </div>
+    @endif
+    
     @foreach($posts as $post)
     <!-- Post -->
     <div class="post">
         <div class="user-block">
             <img class="img-circle img-bordered-sm" src="https://picsum.photos/300/300" alt="user image">
             <span class="username">
-                <a href="#">{{Auth::user()->name}}</a>
+                <a href="#">{{$post->user->name}}</a>
                 <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
             </span>
             <span class="description">{{ $post->created_at->diffForHumans()}}</span>
