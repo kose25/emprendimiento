@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use App\Models\Like;
 
 class Profilepost extends Component
 {
@@ -21,12 +22,12 @@ class Profilepost extends Component
 
     //public $currentPost;
 
-    public $likeicon = 'far fa-thumbs-up mr-1';
+    //public $likeicon = 'far fa-thumbs-up mr-1';
 
     public function mount()
     {
 
-        $this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();;
+        //$this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
         //dd($posts);
 
         //$initialPosts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
@@ -37,7 +38,7 @@ class Profilepost extends Component
 
         $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
 
-        $this->posts->prepend($createdPost);
+        //$this->posts->prepend($createdPost);
 
 
         /* array_unshift(
@@ -51,20 +52,19 @@ class Profilepost extends Component
         $this->newPost = 'Que estas pensando?';
     }
 
-    public function addComment($currentPost, $index){
-        $createdComment = Comment::create(['content' => $this->newComment, 'user_id' => Auth::user()->id, 'post_id'=> $currentPost]);
-        $this->posts[$index]->comments->push($createdComment);
-        $this->newComment='';
-
+    public function addComment($currentPost, $index)
+    {
+        $createdComment = Comment::create(['content' => $this->newComment, 'user_id' => Auth::user()->id, 'post_id' => $currentPost]);
+        //$this->posts[$index]->comments->push($createdComment);
+        $this->newComment = '';
     }
 
-    public function hitLike()
+    public function hitLike($currentPost)
     {
-        if ($this->likeicon = 'far fa-thumbs-up mr-1') {
-            $this->likeicon = 'fas fa-thumbs-up mr-1';
-        }
-        if ($this->likeicon = 'fas fa-thumbs-up mr-1') {
-            $this->likeicon = 'far fa-thumbs-up mr-1';
+        if (Like::where('post_id', $currentPost)->where('user_id', Auth::user()->id)->count() > 0) {
+            Like::where('post_id', $currentPost)->delete();
+        } else {
+            Like::create(['user_id' => Auth::user()->id, 'post_id' => $currentPost]);
         }
     }
 
@@ -72,6 +72,7 @@ class Profilepost extends Component
 
     public function render()
     {
+        $this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
         return view('livewire.profilepost');
     }
 }

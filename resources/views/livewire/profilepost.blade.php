@@ -23,8 +23,8 @@
 
         <p>
             <!-- <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a> -->
-            <button type="button" class="btn btn-link" wire:click="hitLike()"><i class="{{$likeicon}}"></i> Like</button>
-            <!-- <a href="#" class="link-black text-sm"><i class="{{$likeicon}}"></i> Like</a> -->
+            <button type="button" class="btn btn-link" wire:click="hitLike({{ $post->id }})" >({{count($post->likes)}})<i class="@if(count($post->likes->where('user_id', Auth::user()->id))>0) fas fa-thumbs-up @else far fa-thumbs-up @endif"></i>Like</button>
+            <!-- <a href="#" class="link-black text-sm"><i class=""></i> Like</a> -->
             <span class="float-right">
                 <a href="#" class="link-black text-sm">
                     <i class="far fa-comments mr-1"></i> Comments ({{count($post->comments)}})

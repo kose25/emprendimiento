@@ -57,4 +57,9 @@ class User extends Authenticatable
         return 'user/'.$this->rol;
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Like::class);
+    }
+
 }
