@@ -6,9 +6,11 @@
         <div class="d-flex flex-row-reverse my-2">
             <button type="button" class="btn btn-primary" wire:click="addPost">Postear</button>
         </div>
+        <label for="avatar">Sube una foto:</label>
+        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" wire:model="photo">
     </div>
     @endif
-    
+
     @foreach($posts as $post)
     <!-- Post -->
     <div class="post">
@@ -24,10 +26,15 @@
         <p>
             {{$post['body']}}
         </p>
+        @if(isset($post->foto))
+
+        <img class="img-fluid" src="{{ asset('storage').'/'.$post->foto}}" alt="">
+
+        @endif
 
         <p>
             <!-- <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a> -->
-            <button type="button" class="btn btn-link" wire:click="hitLike({{ $post->id }})" >({{count($post->likes)}})<i class="@if(count($post->likes->where('user_id', Auth::user()->id))>0) fas fa-thumbs-up @else far fa-thumbs-up @endif"></i>Like</button>
+            <button type="button" class="btn btn-link" wire:click="hitLike({{ $post->id }})">({{count($post->likes)}})<i class="@if(count($post->likes->where('user_id', Auth::user()->id))>0) fas fa-thumbs-up @else far fa-thumbs-up @endif"></i>Like</button>
             <!-- <a href="#" class="link-black text-sm"><i class=""></i> Like</a> -->
             <span class="float-right">
                 <a href="#" class="link-black text-sm">

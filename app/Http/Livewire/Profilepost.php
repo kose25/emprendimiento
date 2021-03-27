@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Like;
 //use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 class Profilepost extends Component
 {
 
     //use WithPagination;
+    use WithFileUploads;
+
+    public $photo;
 
     public $posts;
 
@@ -41,7 +45,16 @@ class Profilepost extends Component
     public function addPost()
     {
 
-        $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
+        //$createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
+        if (is_null($this->photo)) {
+            $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
+        } else {
+            $fotico = $this->photo->store('uploads', 'public');
+            Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'foto' => $fotico]);
+            $this->photo= null;
+        }
+
+
 
         //$this->posts->prepend($createdPost);
 
@@ -80,7 +93,7 @@ class Profilepost extends Component
         if (is_null($this->user)) {
             $this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
         } else {
-            $this->posts= Post::where('usuario', $this->user->id)->orderByDesc('id')->get();
+            $this->posts = Post::where('usuario', $this->user->id)->orderByDesc('id')->get();
         }
 
 
