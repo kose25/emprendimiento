@@ -14,6 +14,7 @@ class Post extends Model
         'body',
         'usuario',
         'foto',
+        'pdf',
     ];
 
     //obtiene los comentarios del post

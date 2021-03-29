@@ -19,6 +19,8 @@ class Profilepost extends Component
 
     public $photo;
 
+    public $pdf;
+
     public $posts;
 
     public $initialPosts;
@@ -46,12 +48,16 @@ class Profilepost extends Component
     {
 
         //$createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
-        if (is_null($this->photo)) {
+        if (is_null($this->photo)&&is_null($this->pdf)) {
             $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
-        } else {
+        } elseif($this->photo) {
             $fotico = $this->photo->store('uploads', 'public');
             Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'foto' => $fotico]);
             $this->photo= null;
+        }else{
+            $pdfcito = $this->pdf->store('uploads', 'public');
+            Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'pdf' => $pdfcito]);
+            $this->pdf= null;
         }
 
 

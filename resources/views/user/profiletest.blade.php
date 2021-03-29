@@ -97,7 +97,7 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
-                        <livewire:profilepost :user="$user"/>
+                        <livewire:profilepost :user="$user" />
 
                         <!-- Post -->
                         <div class="post">
@@ -214,17 +214,20 @@
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
 
-                    <div class="container-fluid">
-                    <b>Nombre:</b> <p>{{$user->name}}</p>
-                    <b>Correo:</b> <p>{{$user->email}}</p>
-                    <b>Cargo:</b> <p>{{$user->rol}}</p>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text">Content</p>
+                        <div class="container-fluid">
+                            <b>Nombre:</b>
+                            <p>{{$user->name}}</p>
+                            <b>Correo:</b>
+                            <p>{{$user->email}}</p>
+                            <b>Cargo:</b>
+                            <p>{{$user->rol}}</p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Title</h5>
+                                    <p class="card-text">Content</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
 
                     </div>
                     <!-- /.tab-pane -->
@@ -292,6 +295,12 @@
 @stop
 
 @section('js')
+
+<script type="text/javascript">
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 
 @livewireScripts
 
