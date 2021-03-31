@@ -41,7 +41,13 @@
             <img class="img-circle img-bordered-sm" src="https://picsum.photos/300/300" alt="user image">
             <span class="username">
                 <a href="#">{{$post->user->name}}</a>
-                <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                <a href="#" class="float-right btn-tool" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @if($user->id==Auth::user()->id || Auth::user()->rol=='administrador')
+                    <button class="dropdown-item" wire:click="delete({{ $post->id }})" onclick="return confirm('¿Quieres Borrar el Post?')">Eliminar</button>
+                    @endif
+                    <a class="dropdown-item" href="#">Reportar</a>
+                </div>
             </span>
             <span class="description">{{ $post->created_at->diffForHumans()}}</span>
         </div>

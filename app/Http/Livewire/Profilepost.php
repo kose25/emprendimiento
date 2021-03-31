@@ -83,6 +83,10 @@ class Profilepost extends Component
         $this->newComment = '';
     }
 
+    public function delete($currentPost){
+        Post::find($currentPost)->delete();
+    }
+
     public function hitLike($currentPost)
     {
         if (Like::where('post_id', $currentPost)->where('user_id', Auth::user()->id)->count() > 0) {
