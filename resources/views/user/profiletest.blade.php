@@ -14,7 +14,7 @@
         <!-- Profile Image -->
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
-            <livewire:profile-card :user="$user" />
+                <livewire:profile-card :user="$user" />
             </div>
             <!-- /.card-body -->
         </div>
@@ -28,7 +28,7 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <p class="text-muted">
-                    {{$user->descripcion}}
+                    {{$user->aboutme}}
                 </p>
 
 
@@ -45,6 +45,7 @@
                     <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Publicaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Informacion</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Contactos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#networks" data-toggle="tab">Redes</a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -182,12 +183,6 @@
                             <p>{{$user->email}}</p>
                             <b>Cargo:</b>
                             <p>{{$user->rol}}</p>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Title</h5>
-                                    <p class="card-text">Content</p>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -213,6 +208,13 @@
                             @else
                             <p>este perfil no sigue a nadie aun</p>
                             @endif
+                        </div>
+
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="networks">
+                        <div class="overflow-auto" style="height: 380px;">
+                        <livewire:profile-network :user="$user" />
                         </div>
 
                     </div>

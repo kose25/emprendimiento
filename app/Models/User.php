@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'aboutme',
     ];
 
     /**
@@ -68,6 +69,11 @@ class User extends Authenticatable
 
     public function seguidos(){
         return $this->hasMany(Follow::class);
+    }
+
+    public function network()
+    {
+        return $this->hasOne(Network::class);
     }
 
 }
