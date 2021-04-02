@@ -2,7 +2,7 @@
 
     @if(isset($user) && $user->id==Auth::user()->id)
     <div class="my-2">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost">Que estas pensando?</textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required>Que estas pensando?</textarea>
         @if ($photo)
         Previsualizacion de foto:
         <img src="{{ $photo->temporaryUrl() }}" class="img-fluid mx-auto d-block">
@@ -38,9 +38,9 @@
     <!-- Post -->
     <div class="post">
         <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="https://picsum.photos/300/300" alt="user image">
+            <img class="img-circle img-bordered-sm" src="{{asset('storage').'/'.$post->user->foto}}" alt="user image">
             <span class="username">
-                <a href="#">{{$post->user->name}}</a>
+                <a href="{{ url('usuario/'.$post->user->id) }}">{{$post->user->name}}</a>
                 <a href="#" class="float-right btn-tool" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @if($user->id==Auth::user()->id || Auth::user()->rol=='administrador')
@@ -92,11 +92,16 @@
             @foreach($post->comments as $comment)
             <div class="card-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="https://picsum.photos/128/128" alt="User Image">
+                @if($comment->user->foto)
+                <img class="img-circle img-sm" src="{{asset('storage').'/'.$comment->user->foto}}" alt="User Image">
+                @else
+                <img class="img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg').'/'.$comment->user->foto}}" alt="User Image">
+                @endif
+
 
                 <div class="comment-text">
                     <span class="username">
-                        {{$comment->user->name}}
+                    <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>                        
                         <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
                     </span><!-- /.username -->
                     {{$comment->content}}

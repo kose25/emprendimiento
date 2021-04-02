@@ -1,9 +1,13 @@
 <div>
     <div class="text-center">
-        <img class="profile-user-img img-fluid img-circle" src="https://picsum.photos/300/300" alt="User profile picture">
+        @if($user->foto)
+        <img class="profile-user-img img-fluid img-circle" style="object-fit: cover; width:100px; height:100px;" src="{{asset('storage').'/'.$user->foto}}" alt="User profile picture">
+        @else
+        <img class="profile-user-img img-fluid img-circle"  style="object-fit: cover; width:100px; height:100px;" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User profile picture">
+        @endif
     </div>
 
-    <h3 class="profile-username text-center">{{$user->name}}</h3>
+    <h3 class="profile-username text-center">{{$user->name}} {{$user->apellidos}}</h3>
 
     <p class="text-muted text-center">{{Str::ucfirst($user->rol)}}</p>
 

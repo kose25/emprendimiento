@@ -13,6 +13,11 @@ class ProfileCard extends Component
 
     public $button;
 
+    public $listeners = [
+        'profile updated' => 'render',
+        'postAdded' => 'render'
+    ];
+
     public function follow()
     {
         if (Follow::where('user_id', Auth::user()->id)->where('follows', $this->user->id)->count() > 0) {

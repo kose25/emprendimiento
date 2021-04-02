@@ -2,7 +2,7 @@
 @section('title', 'Mi Perfil')
 
 @section('css')
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @livewireStyles
 @endsection
 
@@ -168,22 +168,7 @@
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
 
-                        <div class="container-fluid">
-                            <b>Nombre:</b>
-                            <p>{{$user->name}}</p>
-                            <b>Apellidos:</b>
-                            <p>{{$user->apellidos}}</p>
-                            <b>Celular:</b>
-                            <p>{{$user->celular}}</p>
-                            <b>Sexo:</b>
-                            <p>{{$user->sexo}}</p>
-                            <b>Fecha de Nacimiento:</b>
-                            <p>{{$user->fechanacimiento}}</p>
-                            <b>Correo:</b>
-                            <p>{{$user->email}}</p>
-                            <b>Cargo:</b>
-                            <p>{{$user->rol}}</p>
-                        </div>
+                        <livewire:profile-info :user="$user" />
 
                     </div>
                     <!-- /.tab-pane -->
@@ -214,7 +199,7 @@
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="networks">
                         <div class="overflow-auto" style="height: 380px;">
-                        <livewire:profile-network :user="$user" />
+                            <livewire:profile-network :user="$user" />
                         </div>
 
                     </div>
@@ -241,6 +226,28 @@
 </script>
 
 @livewireScripts
+
+<script>
+    Livewire.on('alert', function() {
+        Swal.fire(
+            'Cambios Guardados Correctamente',
+            'Sus redes se guardaron correctamente',
+            'success'
+        )
+        $('#exampleModal').modal('hide');
+    })
+    Livewire.on('profile updated', function() {
+        Swal.fire(
+            'Cambios Guardados Correctamente',
+            'Sus informacion de perfil se guardo correctamente',
+            'success'
+        )
+        $('#profileModal').modal('hide');
+    })
+    Livewire.on('openmodal', function() {        
+        $('#exampleModal').modal('show');
+    })
+</script>
 
 
 

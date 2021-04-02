@@ -25,6 +25,8 @@ class ProfileNetwork extends Component
                 'twitter' => $this->twitter, 'linkedin' => $this->linkedin, 'instagram' => $this->instagram
             ]);
         }
+
+        $this->emit('alert');
     }
 
     public function render()

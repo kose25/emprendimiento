@@ -11,6 +11,9 @@
                     @if($user->network->linkedin)<li class="list-group-item"><a href="{{$user->network->linkedin}}" target="_blank"><i class="fab fa-linkedin"></i> Linkedin</a></li>@endif
                     @if($user->network->twitter)<li class="list-group-item"><a href="{{$user->network->twitter}}" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>@endif
                 </ul>
+                @if(!$user->network->facebook && !$user->network->instagram && !$user->network->linkedin && !$user->network->twitter)
+                No hay Redes asociadas
+                @endif
                 @else
                 <p>Aun no tiene redes asociadas</p>
                 @endif
@@ -29,32 +32,33 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form wire:submit.prevent="saveNetwork">
+                            <form wire:submit.prevent="saveNetwork" id="networkform">
                                 <div class="form-group">
                                     <label for="facebook">Facebook</label>
                                     <input type="url" class="form-control" id="facebook" aria-describedby="emailHelp" wire:model.defer="facebook" placeholder="Enlace de su perfil de FB" pattern="https://www.facebook.com.*">
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="instagram">Instagram</label>
                                     <input type="url" class="form-control" id="instagram" aria-describedby="emailHelp" wire:model.defer="instagram" placeholder="Enlace de su perfil de Instagram" pattern="https://www.instagram.com.*">
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="linkedin">Linkedin</label>
                                     <input type="url" class="form-control" id="linkedin" aria-describedby="emailHelp" wire:model.defer="linkedin" placeholder="Enlace de su perfil de Linkedin" pattern="https://www.linkedin.com.*">
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="twitter">Twitter</label>
                                     <input type="url" class="form-control" id="twitter" aria-describedby="emailHelp" wire:model.defer="twitter" placeholder="Enlace de su perfil de Twitter" pattern="https://twitter.com.*">
-                                    
+
                                 </div>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <button type="submit" class="btn btn-primary d-none">Guardar Cambios</button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary d-none" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-secondary d-none" data-dismiss="modal">Close</button>
+                            <button type="submit" form="networkform" class="btn btn-primary">Guardar Informacion</button>
                         </div>
                     </div>
                 </div>

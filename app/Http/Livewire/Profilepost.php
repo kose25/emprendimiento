@@ -25,7 +25,7 @@ class Profilepost extends Component
 
     public $initialPosts;
 
-    public $newPost;
+    public $newPost='Que estas pensando?';
 
     public $newComment;
 
@@ -48,16 +48,19 @@ class Profilepost extends Component
     {
 
         //$createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
-        if (is_null($this->photo)&&is_null($this->pdf)) {
-            $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
-        } elseif($this->photo) {
-            $fotico = $this->photo->store('uploads', 'public');
-            Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'foto' => $fotico]);
-            $this->photo= null;
-        }else{
-            $pdfcito = $this->pdf->store('uploads', 'public');
-            Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'pdf' => $pdfcito]);
-            $this->pdf= null;
+        if ($this->newPost && $this->newPost!='Que estas pensando?') {
+            if (is_null($this->photo) && is_null($this->pdf)) {
+                $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
+            } elseif ($this->photo) {
+                $fotico = $this->photo->store('uploads', 'public');
+                Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'foto' => $fotico]);
+                $this->photo = null;
+            } else {
+                $pdfcito = $this->pdf->store('uploads', 'public');
+                Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'pdf' => $pdfcito]);
+                $this->pdf = null;
+            }
+            $this->emit('postAdded');
         }
 
 
@@ -83,7 +86,8 @@ class Profilepost extends Component
         $this->newComment = '';
     }
 
-    public function delete($currentPost){
+    public function delete($currentPost)
+    {
         Post::find($currentPost)->delete();
     }
 
