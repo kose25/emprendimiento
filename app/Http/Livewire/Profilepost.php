@@ -10,6 +10,8 @@ use App\Models\Comment;
 use App\Models\Like;
 //use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class Profilepost extends Component
 {
@@ -25,7 +27,7 @@ class Profilepost extends Component
 
     public $initialPosts;
 
-    public $newPost='Que estas pensando?';
+    public $newPost = 'Que estas pensando?';
 
     public $newComment;
 
@@ -34,6 +36,33 @@ class Profilepost extends Component
     //public $currentPost;
 
     //public $likeicon = 'far fa-thumbs-up mr-1';
+
+    public function resizePhoto($photopath)
+    {
+        $img = Image::make('storage/' . $photopath);
+        if ($img->height() > 1080 && $img->width() > 1080) {
+            if ($img->height() > $img->width()) {
+                $img->resize(null, 1080, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            } else {
+                $img->resize(1080, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+        }
+        if ($img->width() > 1080 && $img->height() <= 1080) {
+            $img->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        } else {
+            $img->resize(null, 1080, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+        $img->save('storage/' . $photopath, 80, 'jpg');
+    }
+
 
     public function mount()
     {
@@ -48,11 +77,13 @@ class Profilepost extends Component
     {
 
         //$createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
-        if ($this->newPost && $this->newPost!='Que estas pensando?') {
+        if ($this->newPost && $this->newPost != 'Que estas pensando?') {
             if (is_null($this->photo) && is_null($this->pdf)) {
                 $createdPost = Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id]);
             } elseif ($this->photo) {
+                //$fotico = $this->photo->store('uploads', 'public');                
                 $fotico = $this->photo->store('uploads', 'public');
+                $this->resizePhoto($fotico);
                 Post::create(['body' => $this->newPost, 'usuario' => Auth::user()->id, 'foto' => $fotico]);
                 $this->photo = null;
             } else {
