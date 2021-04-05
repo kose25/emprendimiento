@@ -290,6 +290,14 @@ return [
                 ],
             ],
         ], */
+        [
+            'header' => 'INICIO'
+        ],
+        [
+            'text' => 'Comunicados Oficiales',
+            'url'  => '/',
+            'icon' => 'far fa-newspaper',
+        ],
 
         [
             'header' => 'USUARIOS',

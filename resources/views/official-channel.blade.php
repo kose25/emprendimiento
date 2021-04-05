@@ -36,16 +36,6 @@
         }
     };
 </script>
-
-<script>
-    $('#summernote').summernote({
-        lang: 'es-ES',
-        placeholder: 'Postea algo Oficial',
-        tabsize: 2,
-        height: 100
-    });
-</script>
-
 @livewireScripts
 
 

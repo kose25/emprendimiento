@@ -1,9 +1,9 @@
 <div>
     <div class="text-center">
         @if($user->foto)
-        <img class="profile-user-img img-fluid img-circle" style="object-fit: cover; width:100px; height:100px;" src="{{asset('storage').'/'.$user->foto}}" alt="User profile picture">
+        <img class="profile-user-img img-fluid img-circle" src="{{asset('storage').'/'.$user->foto}}" alt="User profile picture">
         @else
-        <img class="profile-user-img img-fluid img-circle"  style="object-fit: cover; width:100px; height:100px;" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User profile picture">
+        <img class="profile-user-img img-fluid img-circle"  src="{{asset('img/profilepic placeholder.jpg')}}" alt="User profile picture">
         @endif
     </div>
 

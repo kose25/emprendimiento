@@ -99,7 +99,7 @@
                 @if($comment->user->foto)
                 <img class="img-circle img-sm" src="{{asset('storage').'/'.$comment->user->foto}}" alt="User Image">
                 @else
-                <img class="img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg').'/'.$comment->user->foto}}" alt="User Image">
+                <img class="img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User Image">
                 @endif
 
 
@@ -117,7 +117,11 @@
         </div>
         <div class="card-footer">
             <div>
-                <img class="img-fluid img-circle img-sm" src="https://picsum.photos/128/128" alt="Alt Text">
+                @if(Auth::User()->foto)
+                <img class="img-fluid img-circle img-sm" src="{{asset('storage').'/'.Auth::User()->foto}}" alt="User Image">
+                @else
+                <img class="img-fluid img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User Image">
+                @endif
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                     <input type="text" class="form-control form-control-sm" placeholder="Presiona enter para comentar" wire:keydown.enter="addComment({{ $post->id }}, {{ $loop->index }})" wire:model.lazy="newComment">

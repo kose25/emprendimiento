@@ -48,9 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
     /* Route::get('/', function () {
         return view('dashboard')->name('home');
     }); */
-    Route::view('/', 'dashboard');
+    //Route::view('/', 'dashboard');
 });
 
-Route::get('/official', function () {
+Route::get('/', function () {
     return view('official-channel');
 })->middleware('auth');

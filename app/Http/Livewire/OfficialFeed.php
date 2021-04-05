@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Query\Builder;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Like;
 
 class OfficialFeed extends Component
 {
@@ -25,9 +26,18 @@ class OfficialFeed extends Component
         $this->newComment = '';
     }
 
+    public function hitLike($currentPost)
+    {
+        if (Like::where('post_id', $currentPost)->where('user_id', Auth::user()->id)->count() > 0) {
+            Like::where('post_id', $currentPost)->where('user_id', Auth::user()->id)->delete();
+        } else {
+            Like::create(['user_id' => Auth::user()->id, 'post_id' => $currentPost]);
+        }
+    }
+
     public function loadMore()
     {
-        $this->limitPerPage = $this->limitPerPage + 6;
+        $this->limitPerPage = $this->limitPerPage + 3;
     }
     public function render()
     {

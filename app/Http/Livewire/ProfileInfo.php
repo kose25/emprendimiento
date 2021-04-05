@@ -15,28 +15,7 @@ class ProfileInfo extends Component
 
     public function resizePhoto($photopath)
     {
-        $img = Image::make('storage/' . $photopath);
-        if ($img->height() > 1080 && $img->width() > 1080) {
-            if ($img->height() > $img->width()) {
-                $img->resize(null, 1080, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            } else {
-                $img->resize(1080, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-        }
-        if ($img->width() > 1080 && $img->height() <= 1080) {
-            $img->resize(1080, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        } else {
-            $img->resize(null, 1080, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
-        $img->save('storage/' . $photopath, 80, 'jpg');
+        $img = Image::make('storage/' . $photopath)->fit(400)->save('storage/' . $photopath, 80, 'jpg');
     }
 
     public function edit()

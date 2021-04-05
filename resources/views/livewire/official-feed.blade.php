@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.10000ms>
     @foreach($posts as $post)
     <div class="card card-widget">
         <div class="card-header">
@@ -55,8 +55,7 @@
             @endif
 
             <!-- Social sharing buttons -->
-            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
-            <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+            <button type="button" class="btn btn-default btn-sm" wire:click="hitLike({{ $post->id }})"><i class="@if(count($post->likes->where('user_id', Auth::user()->id))>0) fas fa-thumbs-up @else far fa-thumbs-up @endif"></i> Like</button>
             <span class="float-right text-muted">{{count($post->likes)}} likes - {{count($post->comments)}} Comentarios</span>
         </div>
         <!-- /.card-body -->
@@ -64,14 +63,18 @@
             @foreach($post->comments as $comment)
             <div class="card-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="https://picsum.photos/128" alt="User Image">
+                @if($comment->user->foto && $comment->user->rol!='administrador')
+                <img class="img-circle img-sm" src="{{asset('storage').'/'.$comment->user->foto}}" alt="User Image">                
+                @else
+                <img class="img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User Image">
+                @endif
 
                 <div class="comment-text">
                     <span class="username">
                         @if($comment->user->rol=='administrador')
-                        Red Regional de Emprendimiento
+                        Regional de Emprendimiento
                         @else
-                        {{$comment->user->name}}
+                        <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>
                         @endif
                         <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
                     </span><!-- /.username -->
@@ -83,13 +86,16 @@
         </div>
         <!-- /.card-footer -->
         <div class="card-footer">
-            
-                <img class="img-fluid img-circle img-sm" src="https://picsum.photos/128" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
-                <div class="img-push">
-                    <input type="text" class="form-control form-control-sm" placeholder="Presiona enter para comentar" wire:keydown.enter="addComment({{ $post->id }})" wire:model.lazy="newComment">
-                </div>
-            
+            @if(Auth::User()->foto)
+            <img class="img-fluid img-circle img-sm" src="{{asset('storage').'/'.Auth::User()->foto}}" alt="User Image">
+            @else
+            <img class="img-fluid img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User Image">
+            @endif
+            <!-- .img-push is used to add margin to elements next to floating images -->
+            <div class="img-push">
+                <input type="text" class="form-control form-control-sm" placeholder="Presiona enter para comentar" wire:keydown.enter="addComment({{ $post->id }})" wire:model.lazy="newComment">
+            </div>
+
         </div>
         <!-- /.card-footer -->
     </div>

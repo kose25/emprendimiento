@@ -45,7 +45,11 @@ class User extends Authenticatable
     public function adminlte_image()
     {
         //$foto=$this->foto;
-        return 'https://picsum.photos/300/300';
+        if (!$this->foto) {
+            return asset('img/profilepic placeholder.jpg');
+        } else {
+            return asset('storage').'/'.$this->foto;
+        }
     }
 
     public function adminlte_desc()
@@ -55,7 +59,7 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return 'usuario/'.$this->id;
+        return 'usuario/' . $this->id;
     }
 
     public function posts()
@@ -63,11 +67,13 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'usuario');
     }
 
-    public function seguidores(){
+    public function seguidores()
+    {
         return $this->hasMany(Follow::class, 'follows');
     }
 
-    public function seguidos(){
+    public function seguidos()
+    {
         return $this->hasMany(Follow::class);
     }
 
@@ -75,5 +81,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Network::class);
     }
-
 }

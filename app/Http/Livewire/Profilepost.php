@@ -23,7 +23,7 @@ class Profilepost extends Component
 
     public $pdf;
 
-    public $posts;
+    //public $posts;
 
     public $initialPosts;
 
@@ -32,6 +32,12 @@ class Profilepost extends Component
     public $newComment;
 
     public $user;
+
+    public $limitPerPage = 3;
+
+    protected $listeners = [
+        'load-more' => 'loadMore'
+    ];
 
     //public $currentPost;
 
@@ -61,6 +67,11 @@ class Profilepost extends Component
             });
         }
         $img->save('storage/' . $photopath, 80, 'jpg');
+    }
+
+    public function loadMore()
+    {
+        $this->limitPerPage = $this->limitPerPage + 3;
     }
 
 
@@ -135,14 +146,11 @@ class Profilepost extends Component
 
     public function render()
     {
-        if (is_null($this->user)) {
-            $this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
-        } else {
-            $this->posts = Post::where('usuario', $this->user->id)->orderByDesc('id')->get();
-        }
+        $posts = Post::where('usuario', $this->user->id)->orderByDesc('id')->paginate($this->limitPerPage);
+
 
 
         //$this->posts = Post::where('usuario', Auth::user()->id)->orderByDesc('id')->get();
-        return view('livewire.profilepost');
+        return view('livewire.profilepost', ['posts' => $posts]);
     }
 }

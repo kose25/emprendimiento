@@ -33,9 +33,9 @@
                             <div class="col-md-4 text-center">
 
                                 @if($user->foto && !$foto)
-                                <img src="{{ asset('storage').'/'.$user->foto}}" alt="" class="profile-user-img img-fluid img-circle" id="profilepic" style="object-fit: cover; width:128px; height:128px;">
+                                <img src="{{ asset('storage').'/'.$user->foto}}" alt="" class="profile-user-img img-fluid img-circle" id="profilepic">
                                 @elseif(!$user->foto && !$foto)
-                                <img src="{{asset('img/profilepic placeholder.jpg')}}" alt="" class="profile-user-img img-fluid img-circle" style="object-fit: cover; width:128px; height:128px;" id="profilepic">
+                                <img src="{{asset('img/profilepic placeholder.jpg')}}" alt="" class="profile-user-img img-fluid img-circle" id="profilepic">
                                 @endif
                                 @if($foto)
                                 <img src="{{$foto->temporaryUrl()}}" alt="" class="profile-user-img img-fluid img-circle" style="object-fit: cover; width:128px; height:128px;" id="profilepic">
