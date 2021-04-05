@@ -50,3 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     }); */
     Route::view('/', 'dashboard');
 });
+
+Route::get('/official', function () {
+    return view('official-channel');
+})->middleware('auth');

@@ -38,7 +38,11 @@
     <!-- Post -->
     <div class="post">
         <div class="user-block">
+            @if($post->user->foto)
             <img class="img-circle img-bordered-sm" src="{{asset('storage').'/'.$post->user->foto}}" alt="user image">
+            @else
+            <img class="img-circle img-bordered-sm" src="{{asset('img/profilepic placeholder.jpg')}}" alt="user image">
+            @endif
             <span class="username">
                 <a href="{{ url('usuario/'.$post->user->id) }}">{{$post->user->name}}</a>
                 <a href="#" class="float-right btn-tool" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
@@ -101,7 +105,7 @@
 
                 <div class="comment-text">
                     <span class="username">
-                    <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>                        
+                        <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>
                         <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
                     </span><!-- /.username -->
                     {{$comment->content}}
@@ -116,7 +120,7 @@
                 <img class="img-fluid img-circle img-sm" src="https://picsum.photos/128/128" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
-                    <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment" wire:keydown.enter="addComment({{ $post->id }}, {{ $loop->index }})" wire:model.lazy="newComment">
+                    <input type="text" class="form-control form-control-sm" placeholder="Presiona enter para comentar" wire:keydown.enter="addComment({{ $post->id }}, {{ $loop->index }})" wire:model.lazy="newComment">
                 </div>
             </div>
         </div>

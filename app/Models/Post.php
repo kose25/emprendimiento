@@ -34,4 +34,8 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function adminPosts(){
+        return $this->hasMany(User::class);
+    }
 }
