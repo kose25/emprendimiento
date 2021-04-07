@@ -54,3 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', function () {
     return view('official-channel');
 })->middleware('auth');
+
+Route::get('promociones', function () {
+    return view('user-feed');
+})->middleware('auth');

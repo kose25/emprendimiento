@@ -86,7 +86,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -297,6 +297,11 @@ return [
             'text' => 'Comunicados Oficiales',
             'url'  => '/',
             'icon' => 'far fa-newspaper',
+        ],
+        [
+            'text' => 'Promociones',
+            'url'  => 'promociones',
+            'icon' => 'fas fa-list-alt',
         ],
 
         [
