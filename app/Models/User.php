@@ -48,7 +48,7 @@ class User extends Authenticatable
         if (!$this->foto) {
             return asset('img/profilepic placeholder.jpg');
         } else {
-            return asset('storage').'/'.$this->foto;
+            return asset('storage') . '/' . $this->foto;
         }
     }
 
@@ -80,5 +80,19 @@ class User extends Authenticatable
     public function network()
     {
         return $this->hasOne(Network::class);
+    }
+
+    public function emprendimientos()
+    {
+        return $this->hasMany(Emprendmiento::class, 'usuario');
+    }
+
+    public function isFollowing($id)
+    {
+        if ($this->seguidos()->where('follow_id', $id)->count() > 0) {
+            return 'Dejar de seguir';
+        } else {
+            return 'Seguir';
+        }
     }
 }

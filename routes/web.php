@@ -58,3 +58,7 @@ Route::get('/', function () {
 Route::get('promociones', function () {
     return view('user-feed');
 })->middleware('auth');
+
+Route::get('search', function () {
+    return view('search');
+})->middleware('auth');

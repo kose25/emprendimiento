@@ -86,7 +86,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => true,
+    'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
 
     /*
@@ -313,6 +313,11 @@ return [
             'url'  => '/usuario',
             'icon' => 'fas fa-users',
             'can'  => ['admin', 'funcionario', 'entidad'],
+        ],
+        [
+            'text' => 'Busqueda',
+            'url'  => '/search',
+            'icon' => 'fas fa-search',
         ],
 
 

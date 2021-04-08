@@ -36,14 +36,14 @@ class ProfileInfo extends Component
             $fotico = $this->foto->store('uploads', 'public');
             $this->resizePhoto($fotico);
             User::where('id', $this->user->id)->update([
-                'name' => $this->nombre, 'apellidos' => $this->apellidos,
+                'name' => trim($this->nombre), 'apellidos' => trim($this->apellidos),
                 'fechanacimiento' => $this->date, 'celular' => $this->celular, 'sexo' => $this->sexo,
                 'foto' => $fotico, 'aboutme' => $this->aboutme
 
             ]);
         } else {
             User::where('id', $this->user->id)->update([
-                'name' => $this->nombre, 'apellidos' => $this->apellidos,
+                'name' => trim($this->nombre), 'apellidos' => trim($this->apellidos),
                 'fechanacimiento' => $this->date, 'celular' => $this->celular, 'sexo' => $this->sexo,
                 'aboutme' => $this->aboutme
 
