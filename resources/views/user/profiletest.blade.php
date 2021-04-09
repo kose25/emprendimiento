@@ -46,23 +46,22 @@
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Informacion</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Contactos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#networks" data-toggle="tab">Redes</a></li>
+                    @if($user->rol=='emprendedor')
+                    <li class="nav-item"><a class="nav-link" href="#portafolios" data-toggle="tab">Portafolios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#emprendimientos" data-toggle="tab">Emprendimientos</a></li>
+                    @endif
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
                         <livewire:profilepost :user="$user" />
-
-
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
-
                         <livewire:profile-info :user="$user" />
-
                     </div>
                     <!-- /.tab-pane -->
-
                     <div class="tab-pane" id="settings">
                         <div class="overflow-auto" style="height: 380px;">
                             @if(count($user->seguidos)>0)
@@ -71,7 +70,11 @@
                                 <!-- Add the bg color to the header using any of the bg-* classes -->
                                 <div class="widget-user-header">
                                     <div class="widget-user-image">
-                                        <img class="img-circle elevation-2" src="https://picsum.photos/128" alt="User Avatar">
+                                        @if($seguido->seguido->foto)
+                                        <img class="img-circle elevation-2" src="{{asset('storage').'/'.$seguido->seguido->foto}}" alt="User Avatar">
+                                        @else
+                                        <img class="img-circle elevation-2" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User Avatar">
+                                        @endif
                                     </div>
                                     <!-- /.widget-user-image -->
                                     <h3 class="widget-user-username"><a href="{{ url('usuario/'.$seguido->seguido->id)}}">{{$seguido->seguido->name}}</a></h3>
@@ -91,7 +94,30 @@
                         <div class="overflow-auto" style="height: 380px;">
                             <livewire:profile-network :user="$user" />
                         </div>
-
+                    </div>
+                    <!-- /.tab-pane -->
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="portafolios">
+                        <div class="overflow-auto" style="height: 380px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mis portafolios</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eaque non beatae eius dolorum rem hic perferendis ad ipsum tempore rerum obcaecati, quisquam molestiae culpa. Ut, modi quod! Illum, amet?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="emprendimientos">
+                        <div class="overflow-auto" style="height: 380px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mis Emprendimientos</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eaque non beatae eius dolorum rem hic perferendis ad ipsum tempore rerum obcaecati, quisquam molestiae culpa. Ut, modi quod! Illum, amet?</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.tab-pane -->
                 </div>

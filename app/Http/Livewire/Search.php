@@ -67,6 +67,9 @@ class Search extends Component
                 case 'emprendimiento':
                     $emprendimiento = Emprendimiento::where('nombre', 'like', '%' . $this->search . '%')->get();
                     break;
+                default:
+                    $result = null;
+                    $emprendimiento = null;
             }
         }
         return view('livewire.search', ['results' => $result, 'emprendimientos' => $emprendimiento]);

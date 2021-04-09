@@ -53,9 +53,11 @@
                         </div>
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username"><a href="{{ url('usuario/'.$result->id) }}">{{$result->name}} {{$result->apellidos}}</a></h3>
+                        @if(Auth::user()->id!=$result->id)
                         <div class="float-right">
                             <button type="button" class="btn btn-primary btn-block" wire:click="follow({{$result->id}})"><b>@if(count($result->seguidores->where('user_id', Auth::user()->id))>0)Dejar de Seguir @else Seguir @endif</b></button>
                         </div>
+                        @endif
                         <h5 class="widget-user-desc">{{$result->rol}}</h5>
                         <h6 class="widget-user-desc"><b>{{count($result->seguidores)}}</b> Seguidores</h6>
                         <h6 class="widget-user-desc"><b>{{count($result->posts)}}</b> Publicaciones</h6>
@@ -66,6 +68,37 @@
                 </div>
             </div>
             @endforeach
+        </div>
+    </div>
+    @endif
+
+    @if($emprendimientos)
+    <div class="row mt-3">
+        <div class="col-md-10 offset-md-1">
+        <p>{{count($emprendimientos)}} resultados</p>
+            <div class="list-group">
+                @foreach($emprendimientos as $emprendimiento)
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-auto">
+                            @if($emprendimiento->foto)
+                            <img class="img-fluid" src="{{asset('storage').'/'.$emprendimiento->foto}}" alt="Photo" style="max-height: 160px;">
+                            @else
+                            <img class="img-fluid" src="{{asset('img/emprendimiento.png')}}" alt="Photo" style="max-height: 160px;">
+                            @endif
+                        </div>
+                        <div class="col px-4">
+                            <div>
+                                <div class="float-right d-none">2021-04-20 10:14pm</div>
+                                <h3>{{$emprendimiento->nombre}}</h3>
+                                <h5>Emprendedor: <a href="{{ url('usuario/'.$emprendimiento->emprendedor->id) }}">{{$emprendimiento->emprendedor->name}}</a></h5>
+                                <p class="mb-0">{{$emprendimiento->descripcion}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
     @endif

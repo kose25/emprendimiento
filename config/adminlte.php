@@ -319,8 +319,24 @@ return [
             'url'  => '/search',
             'icon' => 'fas fa-search',
         ],
-
-
+        [
+            'text' => 'Sectores',
+            'url'  => '/',
+            'icon' => 'fas fa-globe',
+            'can'  => 'admin',
+        ],
+        [
+            'text' => 'Correo Masivo',
+            'url'  => '/',
+            'icon' => 'far fa-envelope',
+            'can'  => 'admin',
+        ],
+        [
+            'text' => 'Informes',
+            'url'  => '/',
+            'icon' => 'far fa-file-alt',
+            'can'  => 'admin',
+        ],
 
         [
             'header' => 'EMPRENDIMIENTO',
@@ -377,22 +393,7 @@ return [
             'url'  => '/funcionario/create',
             //'icon' => 'fas fa-fw fa-lock',
         ], */
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        
     ],
 
     /*
