@@ -111,13 +111,14 @@
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="emprendimientos">
                         <div class="overflow-auto" style="height: 380px;">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mis Emprendimientos</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eaque non beatae eius dolorum rem hic perferendis ad ipsum tempore rerum obcaecati, quisquam molestiae culpa. Ut, modi quod! Illum, amet?</p>
-                                </div>
-                            </div>
+                            <livewire:user-emprendimientos :user="$user" />
                         </div>
+                        @if($user->id==Auth::user()->id)
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearEmprendimiento">
+                            Crear Emprendimiento
+                        </button>
+                        <button type="button" class="btn btn-secondary">Secondary</button>
+                        @endif
                     </div>
                     <!-- /.tab-pane -->
                 </div>
@@ -167,8 +168,13 @@
         )
         $('#profileModal').modal('hide');
     })
-    Livewire.on('openmodal', function() {
-        $('#exampleModal').modal('show');
+    Livewire.on('emprendimiento added', function() {
+        Swal.fire(
+            'Cambios Guardados Correctamente',
+            'Emprendimiento agregado exitosamente',
+            'success'
+        )
+        $('#crearEmprendimiento').modal('hide');
     })
 </script>
 

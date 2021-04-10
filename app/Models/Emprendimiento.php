@@ -19,6 +19,7 @@ class Emprendimiento extends Model
         'fechaconstitucion',
         'sector',
         'lider',
+        'entidad',
     ];
 
     public function emprendedor()

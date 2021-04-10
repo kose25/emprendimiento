@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function emprendimientos()
     {
-        return $this->hasMany(Emprendmiento::class, 'usuario');
+        return $this->hasMany(Emprendimiento::class, 'lider');
     }
 
     public function isFollowing($id)
