@@ -15,7 +15,7 @@ class Emprendimiento extends Model
         'nit',
         'ciudad',
         'foto',
-        'ceular',
+        'celular',
         'fechaconstitucion',
         'sector',
         'lider',

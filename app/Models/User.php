@@ -95,4 +95,9 @@ class User extends Authenticatable
             return 'Seguir';
         }
     }
+
+    public function protafolios()
+    {
+        return $this->hasMany(Portafolio::class);
+    }
 }

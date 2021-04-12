@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Mi Perfil')
+@section('title', $user->name)
 
 @section('css')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -41,7 +41,7 @@
     <div class="col-md-9">
         <div class="card">
             <div class="card-header p-2">
-                <ul class="nav nav-pills">
+                <ul class="nav nav-pills nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Publicaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Informacion</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Contactos</a></li>
@@ -98,26 +98,18 @@
                     <!-- /.tab-pane -->
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="portafolios">
-                        <div class="overflow-auto" style="height: 380px;">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mis portafolios</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eaque non beatae eius dolorum rem hic perferendis ad ipsum tempore rerum obcaecati, quisquam molestiae culpa. Ut, modi quod! Illum, amet?</p>
-                                </div>
-                            </div>
-                        </div>
+                        <livewire:user-portafolios :user="$user" />
                     </div>
                     <!-- /.tab-pane -->
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="emprendimientos">
-                        <div class="overflow-auto" style="height: 380px;">
+                        <div class="overflow-auto mb-3" style="height: 380px;">
                             <livewire:user-emprendimientos :user="$user" />
                         </div>
                         @if($user->id==Auth::user()->id)
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearEmprendimiento">
                             Crear Emprendimiento
                         </button>
-                        <button type="button" class="btn btn-secondary">Secondary</button>
                         @endif
                     </div>
                     <!-- /.tab-pane -->
@@ -175,6 +167,37 @@
             'success'
         )
         $('#crearEmprendimiento').modal('hide');
+    })
+    Livewire.on('empDeleted', function() {
+        Swal.fire(
+            'Emprendimiento Borrado',
+            'Emprendimiento Borrado exitosamente',
+            'success'
+        )
+
+    })
+    Livewire.on('empUpdated', function() {
+        Swal.fire(
+            'Cambios Guardados Correctamente',
+            'Emprendimiento Editado exitosamente',
+            'success'
+        )
+        $('#editEmprendimiento').modal('hide');
+    })
+    Livewire.on('portafolio saved', function() {
+        Swal.fire(
+            'Cambios Guardados Correctamente',
+            'Portafolio creado exitosamente',
+            'success'
+        )
+        $('#crearPortafolio').modal('hide');
+    })
+    Livewire.on('portafolio deleted', function() {
+        Swal.fire(
+            'Cambios Guardados Correctamente',
+            'Portafolio borrado exitosamente',
+            'success'
+        )
     })
 </script>
 
