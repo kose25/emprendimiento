@@ -26,4 +26,9 @@ class Emprendimiento extends Model
     {
         return $this->belongsTo(User::class, 'lider');
     }
+
+    public function integrantes()
+    {
+        return $this->hasMany(Integrante::class);
+    }
 }

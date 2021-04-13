@@ -320,6 +320,12 @@ return [
             'icon' => 'fas fa-search',
         ],
         [
+            'text' => 'Equipo',
+            'url'  => '/team',
+            'icon' => 'fas fa-users-cog',
+            'can' => 'emprendedor',
+        ],
+        [
             'text' => 'Sectores',
             'url'  => '/',
             'icon' => 'fas fa-globe',
@@ -336,24 +342,6 @@ return [
             'url'  => '/',
             'icon' => 'far fa-file-alt',
             'can'  => 'admin',
-        ],
-
-        [
-            'header' => 'EMPRENDIMIENTO',
-            'can'  => 'emprendedor',
-        ],
-        [
-            'text' => 'Ver',
-            'url'  => '/emprendimiento',
-            'can'  => 'emprendedor',
-            //'icon' => 'fas fa-users',
-        ],
-        [
-            'text' => 'Crear',
-            'url'  => '/emprendimiento/create',
-            'can'  => 'emprendedor',
-
-            //'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'header' => 'EMPRENDEDOR',
@@ -393,7 +381,7 @@ return [
             'url'  => '/funcionario/create',
             //'icon' => 'fas fa-fw fa-lock',
         ], */
-        
+
     ],
 
     /*

@@ -75,7 +75,7 @@
     @if($emprendimientos)
     <div class="row mt-3">
         <div class="col-md-10 offset-md-1">
-        <p>{{count($emprendimientos)}} resultados</p>
+            <p>{{count($emprendimientos)}} resultados</p>
             <div class="list-group">
                 @foreach($emprendimientos as $emprendimiento)
                 <div class="list-group-item">

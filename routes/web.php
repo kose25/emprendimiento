@@ -62,3 +62,7 @@ Route::get('promociones', function () {
 Route::get('search', function () {
     return view('search');
 })->middleware('auth');
+
+Route::get('team', function () {
+    return view('emp-team');
+})->middleware('auth');

@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apellidos',
         'email',
         'password',
         'aboutme',
@@ -99,5 +100,10 @@ class User extends Authenticatable
     public function protafolios()
     {
         return $this->hasMany(Portafolio::class);
+    }
+
+    public function equipos()
+    {
+        return $this->hasMany(Integrante::class);
     }
 }
