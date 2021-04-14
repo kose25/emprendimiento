@@ -3,7 +3,7 @@
         <div class="card-body">
             <h5 class="card-title">Haz un nuevo Post Oficial</h5>
             <div class="my-2">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required>Que estas pensando?</textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required placeholder="Postea algo Oficial"></textarea>
 
                 @if ($photo)
                 Previsualizacion de foto:

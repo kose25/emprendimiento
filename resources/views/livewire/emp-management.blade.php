@@ -115,10 +115,10 @@
     @if($selectedEmp)
 
     <button class="btn btn-primary" type="button" wire:click="setEmp">Atras</button>
-    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AgregarEMprendedor">Agregar Integrante</button>
-    <button class="btn btn-primary" type="button">Crear Integrante</button>
+    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AgregarEmprendedor">Agregar Integrante</button>
+    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#crearEmprendedor">Crear Integrante</button>
     <!-- Modal -->
-    <div class="modal fade" id="AgregarEMprendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+    <div class="modal fade" id="AgregarEmprendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -171,6 +171,42 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="crearEmprendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Emprendedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="newEmprendedor" wire:submit.prevent="create">
+                        <div class="form-group">
+                            <label for="nombreNewEmprendedor">Nombre:</label>
+                            <input type="text" class="form-control" id="nombreNewEmprendedor" aria-describedby="emailHelp" placeholder="Ingrese nombre del nuevo emprendedor" required wire:model="nombre">
+                            @error('nombre') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidosNewEmprendedor">Apellidos:</label>
+                            <input type="text" class="form-control" id="apellidosNewEmprendedor" aria-describedby="emailHelp" placeholder="Ingrese apellidos de nuevo emprendedor" required wire:model="apellidos">
+                            @error('apellidos') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="emailNewEmprendedor">Email:</label>
+                            <input type="email" class="form-control" id="emailNewEmprendedor" aria-describedby="emailHelp" placeholder="Ingrese Email de nuevo emprendedor" required wire:model="email">
+                            @error('email') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="newEmprendedor" class="btn btn-primary" wire:loading.attr="disabled">Crear Emprendedor</button>
                 </div>
             </div>
         </div>

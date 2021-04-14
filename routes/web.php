@@ -66,3 +66,7 @@ Route::get('search', function () {
 Route::get('team', function () {
     return view('emp-team');
 })->middleware('auth');
+
+Route::get('sendemail', function () {
+    return view('correo-masivo');
+})->middleware('auth');

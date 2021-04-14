@@ -8,6 +8,10 @@ use App\Models\Emprendimiento;
 use App\Models\Integrante;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use App\Mail\CuentaMailable;
 
 class EmpManagement extends Component
 {
@@ -16,6 +20,14 @@ class EmpManagement extends Component
     public $selectedEmp;
     public $search;
     public $results;
+    public $nombre, $apellidos, $email;
+
+    protected $rules = [
+        'nombre' => 'required|min:5',
+        'apellidos' => 'required|min:4',
+        'email' => 'required|email|unique:users,email',
+    ];
+
 
 
 
@@ -43,6 +55,25 @@ class EmpManagement extends Component
         }
 
         $this->team($this->selectedEmp->id);
+    }
+
+    public function create()
+    {
+        $this->validate();
+        $random = Str::random(8);
+        $pass = Hash::make($random);
+        $newEmp = User::create([
+            'name' => trim($this->nombre),
+            'apellidos' => trim($this->apellidos),
+            'email' => trim($this->email),
+            'password' => $pass,
+        ]);
+        $correo = new CuentaMailable($random, $this->email, 'emprendedor');
+        Mail::to($this->email)->send($correo);
+        Integrante::create(['user_id' => $newEmp->id, 'emprendimiento_id' => $this->selectedEmp->id]);
+        $this->team($this->selectedEmp->id);
+
+        $this->emit('emp created');
     }
 
     public function render()

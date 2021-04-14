@@ -27,7 +27,7 @@ class Profilepost extends Component
 
     public $initialPosts;
 
-    public $newPost = 'Que estas pensando?';
+    public $newPost;
 
     public $newComment;
 

@@ -2,7 +2,7 @@
 
     @if(isset($user) && $user->id==Auth::user()->id)
     <div class="my-2">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required>Que estas pensando?</textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required placeholder="Que estas Pensando?"></textarea>
         @if ($photo)
         Previsualizacion de foto:
         <img src="{{ $photo->temporaryUrl() }}" class="img-fluid mx-auto d-block">

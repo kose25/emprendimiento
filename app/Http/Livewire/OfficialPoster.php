@@ -22,7 +22,7 @@ class OfficialPoster extends Component
 
     public $initialPosts;
 
-    public $newPost = 'Que estas pensando?';
+    public $newPost;
 
     public $newComment;
 
@@ -74,7 +74,7 @@ class OfficialPoster extends Component
             $this->emit('postAdded');
         }
 
-        $this->newPost = 'Que estas pensando?';
+        $this->newPost = null;
         $this->emit('officialPostAdded');
     }
 

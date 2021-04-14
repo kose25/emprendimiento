@@ -226,13 +226,14 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'search' => false,
+            'topnav' => false,
         ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
+            
         ],
         /* [
             'text'        => 'pages',
@@ -333,7 +334,7 @@ return [
         ],
         [
             'text' => 'Correo Masivo',
-            'url'  => '/',
+            'url'  => '/sendemail',
             'icon' => 'far fa-envelope',
             'can'  => 'admin',
         ],
