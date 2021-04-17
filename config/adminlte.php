@@ -345,6 +345,11 @@ return [
             'can'  => 'admin',
         ],
         [
+            'text' => 'Cambiar contraseña',
+            'url'  => '/changepassword',
+            'icon' => 'fas fa-unlock-alt',
+        ],
+        [
             'header' => 'EMPRENDEDOR',
             'can'  => 'funcionario',
         ],

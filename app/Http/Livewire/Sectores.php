@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Sector;
+use App\Models\Emprendimiento;
 
 class Sectores extends Component
 {
@@ -20,6 +21,7 @@ class Sectores extends Component
 
     public function destroy($id)
     {
+        Emprendimiento::where('sector_id', $id)->update(['sector_id' => 17]);
         Sector::destroy($id);
         $this->emit('sector borrado');
     }

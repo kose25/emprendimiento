@@ -74,3 +74,7 @@ Route::get('sendemail', function () {
 Route::get('sectores', function () {
     return view('sectores');
 })->middleware('auth');
+
+Route::get('changepassword', function () {
+    return view('change-password');
+})->middleware('auth');
