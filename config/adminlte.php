@@ -328,7 +328,7 @@ return [
         ],
         [
             'text' => 'Sectores',
-            'url'  => '/',
+            'url'  => '/sectores',
             'icon' => 'fas fa-globe',
             'can'  => 'admin',
         ],

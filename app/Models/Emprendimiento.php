@@ -20,6 +20,7 @@ class Emprendimiento extends Model
         'sector',
         'lider',
         'entidad',
+        'sector_id',
     ];
 
     public function emprendedor()
@@ -30,5 +31,10 @@ class Emprendimiento extends Model
     public function integrantes()
     {
         return $this->hasMany(Integrante::class);
+    }
+
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
     }
 }

@@ -70,3 +70,7 @@ Route::get('team', function () {
 Route::get('sendemail', function () {
     return view('correo-masivo');
 })->middleware('auth');
+
+Route::get('sectores', function () {
+    return view('sectores');
+})->middleware('auth');

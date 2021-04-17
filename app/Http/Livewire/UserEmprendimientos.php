@@ -9,6 +9,7 @@ use App\Models\Emprendimiento;
 use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Sector;
 
 class UserEmprendimientos extends Component
 {
@@ -34,6 +35,8 @@ class UserEmprendimientos extends Component
 
     public $foto;
 
+    public $sectores;
+
 
     public function resizePhoto($photopath)
     {
@@ -51,7 +54,7 @@ class UserEmprendimientos extends Component
         $this->foto = $this->editEmprendimiento->foto;
         $this->celular = $this->editEmprendimiento->celular;
         $this->fechaconstitucion = $this->editEmprendimiento->fechaconstitucion;
-        $this->sector = $this->editEmprendimiento->sector;
+        $this->sector = $this->editEmprendimiento->sector_id;
         $this->entidad = $this->editEmprendimiento->entidad;
     }
 
@@ -65,14 +68,14 @@ class UserEmprendimientos extends Component
                 'nombre' => trim($this->nombre),
                 'descripcion' => $this->descripcion, 'email' => $this->email, 'nit' => $this->nit,
                 'ciudad' => $this->ciudad, 'celular' => $this->celular, 'fechaconstitucion' => $this->fechaconstitucion,
-                'sector' => $this->sector, 'entidad' => $this->entidad, 'foto' => $this->newfoto,
+                'sector_id' => $this->sector, 'entidad' => $this->entidad, 'foto' => $this->newfoto,
             ]);
         } else {
             Emprendimiento::where('id', $this->editEmprendimiento->id)->update([
                 'nombre' => trim($this->nombre),
                 'descripcion' => $this->descripcion, 'email' => $this->email, 'nit' => $this->nit,
                 'ciudad' => $this->ciudad, 'celular' => $this->celular, 'fechaconstitucion' => $this->fechaconstitucion,
-                'sector' => $this->sector, 'entidad' => $this->entidad,
+                'sector_id' => $this->sector, 'entidad' => $this->entidad,
             ]);
         }
 
@@ -109,7 +112,7 @@ class UserEmprendimientos extends Component
             'lider' => $this->user->id, 'nombre' => trim($this->nombre),
             'descripcion' => $this->descripcion, 'email' => $this->email, 'nit' => $this->nit,
             'ciudad' => $this->ciudad, 'celular' => $this->celular, 'fechaconstitucion' => $this->fechaconstitucion,
-            'sector' => $this->sector, 'entidad' => $this->entidad, 'foto' => $this->foto,
+            'sector_id' => $this->sector, 'entidad' => $this->entidad, 'foto' => $this->foto,
         ]);
         $this->emit('emprendimiento added');
 
@@ -131,6 +134,7 @@ class UserEmprendimientos extends Component
             $this->emprendimientos = null;
         }
         $this->entidades = User::where('rol', 'entidad')->get();
+        $this->sectores=Sector::all();
         return view('livewire.user-emprendimientos');
     }
 }

@@ -104,7 +104,7 @@
                         <div class="col-6">
                             <b>Sector:</b>
                             <br>
-                            <p>{{$showEmprendimiento->sector}}</p>
+                            <p>{{$showEmprendimiento->sector->nombre}}</p>
                         </div>
 
                     </div>
@@ -178,9 +178,9 @@
                             <label for="sector">Sector</label>
                             <select class="custom-select" name="sector" required="" id="sexo" wire:model.defer="sector" name="category">
                                 <option value="" disabled="" selected="">Sector</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
+                                @foreach($sectores as $sector)
+                                <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -265,11 +265,11 @@
                         </div>
                         <div class="form-group">
                             <label for="sector">Sector</label>
-                            <select class="custom-select" name="sector" required="" id="sexo" wire:model.defer="sector" name="category">
+                            <select class="custom-select" name="sector" required="" id="sector" wire:model.defer="sector" name="category">
                                 <option value="" disabled="" selected="">Sector</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
+                                @foreach($sectores as $sector)
+                                <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
