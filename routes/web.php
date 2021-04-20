@@ -65,15 +65,15 @@ Route::get('search', function () {
 
 Route::get('team', function () {
     return view('emp-team');
-})->middleware('auth');
+})->middleware('role:emprendedor');
 
 Route::get('sendemail', function () {
     return view('correo-masivo');
-})->middleware('auth');
+})->middleware('role:administrador');
 
 Route::get('sectores', function () {
     return view('sectores');
-})->middleware('auth');
+})->middleware('role:administrador');
 
 Route::get('changepassword', function () {
     return view('change-password');
