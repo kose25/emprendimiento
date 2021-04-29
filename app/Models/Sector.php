@@ -16,4 +16,9 @@ class Sector extends Model
     {
         return $this->hasMany(Emprendimiento::class);
     }
+
+    public function emprendimientosxd()
+    {
+        return $this->belongsToMany(Emprendimiento::class)->withTimestamps();
+    }
 }

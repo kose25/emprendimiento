@@ -29,7 +29,9 @@ class UserEmprendimientos extends Component
 
     public $entidades;
 
-    public $sector = '';
+    public $sectorxd = [];
+
+    public $sector = [];
 
     public $entidad = '';
 
@@ -54,12 +56,14 @@ class UserEmprendimientos extends Component
         $this->foto = $this->editEmprendimiento->foto;
         $this->celular = $this->editEmprendimiento->celular;
         $this->fechaconstitucion = $this->editEmprendimiento->fechaconstitucion;
-        $this->sector = $this->editEmprendimiento->sector_id;
+        $this->sector = $this->editEmprendimiento->sectores->pluck('id')->toArray();
         $this->entidad = $this->editEmprendimiento->entidad;
+        $this->emit('editvaino', $this->editEmprendimiento->sectores->pluck('id')->toArray());
     }
 
     public function update()
     {
+        //dd($this->sector);
         if ($this->newfoto) {
             Storage::delete('public/' . $this->editEmprendimiento->foto);
             $this->newfoto = $this->newfoto->store('uploads', 'public');
@@ -68,18 +72,22 @@ class UserEmprendimientos extends Component
                 'nombre' => trim($this->nombre),
                 'descripcion' => $this->descripcion, 'email' => $this->email, 'nit' => $this->nit,
                 'ciudad' => $this->ciudad, 'celular' => $this->celular, 'fechaconstitucion' => $this->fechaconstitucion,
-                'sector_id' => $this->sector, 'entidad' => $this->entidad, 'foto' => $this->newfoto,
+                //'sector_id' => $this->sector,
+                'entidad' => $this->entidad, 'foto' => $this->newfoto,
             ]);
         } else {
             Emprendimiento::where('id', $this->editEmprendimiento->id)->update([
                 'nombre' => trim($this->nombre),
                 'descripcion' => $this->descripcion, 'email' => $this->email, 'nit' => $this->nit,
                 'ciudad' => $this->ciudad, 'celular' => $this->celular, 'fechaconstitucion' => $this->fechaconstitucion,
-                'sector_id' => $this->sector, 'entidad' => $this->entidad,
+                //'sector_id' => $this->sector,
+                'entidad' => $this->entidad,
             ]);
         }
 
-        $this->newfoto=null;
+        $this->newfoto = null;        
+
+        $this->editEmprendimiento->sectores()->sync($this->sector);
 
         $this->emit('empUpdated');
     }
@@ -103,25 +111,32 @@ class UserEmprendimientos extends Component
 
     public function save()
     {
+        //dd($this->sectorxd);
 
         if ($this->foto) {
             $this->foto = $this->foto->store('uploads', 'public');
             $this->resizePhoto($this->foto);
         }
-        Emprendimiento::create([
+        $emp = Emprendimiento::create([
             'lider' => $this->user->id, 'nombre' => trim($this->nombre),
             'descripcion' => $this->descripcion, 'email' => $this->email, 'nit' => $this->nit,
             'ciudad' => $this->ciudad, 'celular' => $this->celular, 'fechaconstitucion' => $this->fechaconstitucion,
-            'sector_id' => $this->sector, 'entidad' => $this->entidad, 'foto' => $this->foto,
+            //'sector_id' => $this->sector,
+            'entidad' => $this->entidad,
+            'foto' => $this->foto,
         ]);
-        $this->emit('emprendimiento added');
 
-        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad']);
+        $emp->sectores()->sync($this->sectorxd);
+        $this->emit('emprendimiento added');
+        $this->emit('reset');
+
+        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad', 'sectorxd']);
     }
 
     public function cerrar()
     {
-        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad']);
+        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad','sectorxd']);
+        $this->emit('reset');
     }
 
 
@@ -134,7 +149,7 @@ class UserEmprendimientos extends Component
             $this->emprendimientos = null;
         }
         $this->entidades = User::where('rol', 'entidad')->get();
-        $this->sectores=Sector::all();
+        $this->sectores = Sector::all();
         return view('livewire.user-emprendimientos');
     }
 }

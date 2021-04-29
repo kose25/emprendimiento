@@ -16,29 +16,49 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <p>Filtrar por:</p>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="emprendedor" wire:model="filter">
-                <label class="form-check-label" for="inlineRadio1">Emprendedor</label>
+            <div class="form-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="emprendedor" wire:model="filter">
+                    <label class="form-check-label" for="inlineRadio1">Emprendedor</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="funcionario" wire:model="filter">
+                    <label class="form-check-label" for="inlineRadio2">Funcionario</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="entidad" wire:model="filter">
+                    <label class="form-check-label" for="inlineRadio3">Entidad</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="emprendimiento" wire:model="filter">
+                    <label class="form-check-label" for="inlineRadio4">Emprendimiento</label>
+                </div>
+
+                @if($filter=='emprendimiento')
+                <div class="form-group mx-2">
+                    <label for="my-select">Por sector:</label>
+                    <select id="my-select" class="form-control mx-2" name="" wire:model="sector">
+                        <option value="any">Cualquiera</option>
+                        @foreach($sectores as $sector)
+                        <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @endif
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="funcionario" wire:model="filter">
-                <label class="form-check-label" for="inlineRadio2">Funcionario</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="entidad" wire:model="filter">
-                <label class="form-check-label" for="inlineRadio3">Entidad</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="emprendimiento" wire:model="filter">
-                <label class="form-check-label" for="inlineRadio4">Emprendimiento</label>
-            </div>
+
         </div>
     </div>
 
     @if($results)
     <div class="row mt-3">
         <div class="col-md-10 offset-md-1">
-            <p>{{count($results)}} resultados</p>
+            <p>@if($search)
+                {{$results->total()}} resultados
+                @else
+                Mostrando en total {{$results->total()}} cuentas de {{$filter}}
+                @endif
+            </p>
             @foreach($results as $result)
             <div class="row">
                 <div class="card card-widget widget-user-2  w-100">
@@ -68,6 +88,12 @@
                 </div>
             </div>
             @endforeach
+
+            @if($results->hasPages())
+            <div class="d-flex justify-content-center mt-2">
+                {{$results->links()}}
+            </div>
+            @endif
         </div>
     </div>
     @endif
@@ -75,7 +101,7 @@
     @if($emprendimientos)
     <div class="row mt-3">
         <div class="col-md-10 offset-md-1">
-            <p>{{count($emprendimientos)}} resultados</p>
+            <p>{{$emprendimientos->total()}} resultados</p>
             <div class="list-group">
                 @foreach($emprendimientos as $emprendimiento)
                 <div class="list-group-item">
@@ -99,6 +125,11 @@
                 </div>
                 @endforeach
             </div>
+            @if($emprendimientos->hasPages())
+            <div class="d-flex justify-content-center mt-2">
+                {{$emprendimientos->links()}}
+            </div>
+            @endif
         </div>
     </div>
     @endif

@@ -37,4 +37,9 @@ class Emprendimiento extends Model
     {
         return $this->belongsTo(Sector::class);
     }
+
+    public function sectores()
+    {
+        return $this->belongsToMany(Sector::class)->withTimestamps();
+    }
 }

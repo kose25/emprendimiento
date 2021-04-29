@@ -102,9 +102,11 @@
                             <p>{{$showEmprendimiento->fechaconstitucion}}</p>
                         </div>
                         <div class="col-6">
-                            <b>Sector:</b>
+                            <b>Sectores:</b>
                             <br>
-                            <p>{{$showEmprendimiento->sector->nombre}}</p>
+                            <p>{{--$showEmprendimiento->sector->nombre--}}</p>
+                            <p>{{ $showEmprendimiento->sectores->implode('nombre', ', ') }}</p>
+
                         </div>
 
                     </div>
@@ -172,16 +174,17 @@
                         </div>
                         <div class="form-group">
                             <label for="celular">Celular:</label>
-                            <input pattern="[0-9]{10}" class="form-control" id="celular" aria-describedby="emailHelp" wire:model="celular" placeholder="Ingrese numero de celular" type="tel" required name="phone">
+                            <input pattern="[0-9]{10}" class="form-control" id="celular" aria-describedby="emailHelp" wire:model.defer="celular" placeholder="Ingrese numero de celular" type="tel" required name="phone">
                         </div>
                         <div class="form-group">
-                            <label for="sector">Sector</label>
-                            <select class="custom-select" name="sector" required="" id="sexo" wire:model.defer="sector" name="category">
-                                <option value="" disabled="" selected="">Sector</option>
-                                @foreach($sectores as $sector)
-                                <option value="{{$sector->id}}">{{$sector->nombre}}</option>
-                                @endforeach
-                            </select>
+                            <label for="sectorxdxd">Sector</label>
+                            <div wire:ignore>
+                                <select class="selectpicker" name="sector" required id="sectorxdxd" wire:model.defer="sectorxd" multiple data-live-search="true" data-max-options="3" title="Elige 1 o hasta 3 sectores" data-width="75%">
+                                    @foreach($sectores as $sector)
+                                    <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="sector">Entidad</label>
@@ -262,15 +265,17 @@
                         <div class="form-group">
                             <label for="celularedit">Celular</label>
                             <input pattern="[0-9]{10}" class="form-control" id="celularedit" aria-describedby="emailHelp" wire:model.defer="celular" placeholder="Ingrese numero de celular" type="tel" required name="phone">
+
                         </div>
                         <div class="form-group">
-                            <label for="sector">Sector</label>
-                            <select class="custom-select" name="sector" required="" id="sector" wire:model.defer="sector" name="category">
-                                <option value="" disabled="" selected="">Sector</option>
-                                @foreach($sectores as $sector)
-                                <option value="{{$sector->id}}">{{$sector->nombre}}</option>
-                                @endforeach
-                            </select>
+                            <label for="sectorxdeditf">Sector</label>
+                            <div wire:ignore>
+                                <select class="selectpicker" required id="sectorxdeditf" wire:model.defer="sector" multiple data-max-options="3" data-width="75%" title="Seleccione 1 o hasta 3 sectores" data-live-search="true">
+                                    @foreach($sectores as $sector)
+                                    <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="sector">Entidad</label>

@@ -4,7 +4,11 @@
         <div class="card-header">
             <div class="user-block">
                 <img class="img-circle" src="https://picsum.photos/128" alt="User Image">
+                @if($post->user->rol=='administrador')
                 <span class="username"><a href="#">Red Regional de Emprendimiento</a></span>
+                @else
+                <span class="username"><a href="#">{{$post->user->name}}</a></span>
+                @endif
                 <span class="description">Compartio - {{ $post->created_at->diffForHumans()}}</span>
             </div>
             <!-- /.user-block -->

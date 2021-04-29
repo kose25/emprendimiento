@@ -21,8 +21,15 @@ class Sectores extends Component
 
     public function destroy($id)
     {
-        Emprendimiento::where('sector_id', $id)->update(['sector_id' => 17]);
+        $emp = Emprendimiento::whereHas('sectores', function ($q) use ($id) {
+            $q->where('sector_id', $id);
+        })->get();
         Sector::destroy($id);
+        foreach ($emp as $e) {
+            if ($e->sectores->count() == 0) {
+                $e->sectores()->sync(17);
+            }
+        }
         $this->emit('sector borrado');
     }
 

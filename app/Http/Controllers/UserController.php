@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:administrador');
+        //$this->middleware('role:administrador');
     }
     
     public function index()

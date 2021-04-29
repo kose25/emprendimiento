@@ -43,7 +43,7 @@ class OfficialFeed extends Component
     {
         //$posts=Post::where('usuario',5)->get();
         $posts = Post::whereHas('user', function ($q) {
-            $q->where('rol', 'administrador');
+            $q->where('rol', 'administrador')->orWhere('rol', 'entidad');
         })->orderByDesc('id')->paginate($this->limitPerPage);
         return view('livewire.official-feed', ['posts' => $posts]);
     }

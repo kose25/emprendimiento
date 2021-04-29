@@ -22,6 +22,7 @@
                         <small>{{$message}}</small>
                     </div> @enderror
                 </div>
+                <input type="checkbox" onclick="myFunction()">Show Password
             </div>
             <!-- /.card-body -->
 

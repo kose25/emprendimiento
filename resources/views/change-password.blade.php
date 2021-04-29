@@ -37,6 +37,21 @@
             'error'
         )
     })
+
+    function myFunction() {
+        var x = document.getElementById("exampleInputEmail1");
+        var y = document.getElementById("exampleInputPassword1");
+        var z = document.getElementById("exampleInputPassword2");
+        if (x.type === "password" && y.type === "password" && z.type === "password") {
+            x.type = "text";
+            y.type = "text";
+            z.type = "text";
+        } else {
+            x.type = "password";
+            y.type = "password";
+            z.type = "password";
+        }
+    }
 </script>
 
 

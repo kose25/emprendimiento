@@ -12,7 +12,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6">
-        @if(Auth::user()->rol=='administrador')
+        @if(Auth::user()->rol=='administrador'|| Auth::user()->rol=='entidad')
         <livewire:official-poster />
         @endif
 
