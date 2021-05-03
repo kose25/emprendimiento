@@ -179,7 +179,7 @@
                         <div class="form-group">
                             <label for="sectorxdxd">Sector</label>
                             <div wire:ignore>
-                                <select class="selectpicker" name="sector" required id="sectorxdxd" wire:model.defer="sectorxd" multiple data-live-search="true" data-max-options="3" title="Elige 1 o hasta 3 sectores" data-width="75%">
+                                <select class="selectpicker" name="sector" required id="sectorxdxd" wire:model.defer="sectorxd" multiple data-live-search="true" title="Elige 1 o hasta 3 sectores" data-width="75%">
                                     @foreach($sectores as $sector)
                                     <option value="{{$sector->id}}">{{$sector->nombre}}</option>
                                     @endforeach
@@ -270,7 +270,7 @@
                         <div class="form-group">
                             <label for="sectorxdeditf">Sector</label>
                             <div wire:ignore>
-                                <select class="selectpicker" required id="sectorxdeditf" wire:model.defer="sector" multiple data-max-options="3" data-width="75%" title="Seleccione 1 o hasta 3 sectores" data-live-search="true">
+                                <select class="selectpicker" required id="sectorxdeditf" wire:model.defer="sector" multiple data-width="75%" title="Seleccione 1 o hasta 3 sectores" data-live-search="true">
                                     @foreach($sectores as $sector)
                                     <option value="{{$sector->id}}">{{$sector->nombre}}</option>
                                     @endforeach

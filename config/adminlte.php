@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => '<br><b>RED regional de<br> Emprendimiento</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/image010.jpg',
-    'logo_img_class' => 'brand-image elevation-3',
+    'logo' => '<br>RED REGIONAL<br>DE EMPRENDIMIENTO',
+    'logo_img' => 'img/logo2pngsm.png',
+    'logo_img_class' => 'img-circle elevation-3 brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'RED REGIONAL DE EMPRENDIMIENTO',
 
     /*
     |--------------------------------------------------------------------------
