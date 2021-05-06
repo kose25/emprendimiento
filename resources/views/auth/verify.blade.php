@@ -24,10 +24,6 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center my-4">
-        <div class="col-md-8">
-            <img src="{{asset('img/logos.png')}}" alt="" class="img-fluid">
-        </div>
-    </div>
+    @include('layouts.banner')
 </div>
 @endsection

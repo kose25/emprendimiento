@@ -8,10 +8,12 @@
                         <label for="my-asunto">Asunto:</label>
                         <input id="my-asunto" class="form-control" type="text" name="" wire:model.defer="subject" required placeholder="ingrese el asunto del correo">
                     </div>
-                    <label for="">Contenido:</label>
+                    <label>Contenido:</label>
                     <div wire:ignore>
-                        <trix-editor class="trix-content" x-ref="trix" wire:model.defer="body" wire:key="uniqueKey"></trix-editor>
+                        <trix-editor class="trix-content" x-ref="trix" wire:model.debounce.999999ms="body"></trix-editor>
                     </div>
+                    {{--<input id="x" type="hidden" name="content" wire:model="body" value="">
+                    <trix-editor input="x"></trix-editor>--}}
                     <button type="submit" class="btn btn-primary my-3" id="fire">Enviar Correo</button>
                 </form>
             </div>

@@ -22,6 +22,7 @@ class CorreoMasivo extends Component
         $users = User::latest()->limit(10)->get();
         $correo = new CM($this->subject, $this->body);
         //Mail::to($this->email)->send($correo);
+        dd($this->body);
 
         foreach ($users as $user) {
             Mail::to($user->email)->send(new CM($this->subject, $this->body));
@@ -29,7 +30,6 @@ class CorreoMasivo extends Component
         $this->reset(['body', 'subject']);
         $this->emit('correos enviados');
         $this->emit('finished');
-
     }
 
 

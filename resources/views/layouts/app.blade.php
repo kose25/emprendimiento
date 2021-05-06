@@ -17,13 +17,25 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        @media (min-width: 576px) {
+            .carousel-item img {
+                width: auto !important;
+                height: 100px;
+                max-height: 100px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
+    <div id="particles-js" style="position: absolute; width: 100%; height: 100%;"></div>
+    <div id="app" style=" background-image: url('{{ asset('img/Mesa de trabajo 1 copia 2-min.png') }}'); background-position: center; background-repeat: no-repeat;  background-size: cover; ">
         <nav class="navbar navbar-expand-md navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -77,20 +89,132 @@
                 </div>
             </div>
         </nav>
-        <div id="particles-js" style="position: absolute; width: 100%; height: 100%; background-image: url('img/Mesa de trabajo 1 copia 2.png');
- background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;"></div>
         <main class="py-4">
             @yield('content')
+
         </main>
+        <!-- Footer -->
+        <footer class="page-footer font-small bg-dark text-white pt-4">
+
+
+
+            <!-- Footer Links -->
+            <div class="container-fluid text-center text-md-left">
+
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mt-md-0 mt-3">
+
+                        <!-- Content -->
+                        <h5 class="text-uppercase">{{ config('app.name', 'Laravel') }}</h5>
+                        <p>Edif. Cámara de Comercio de Cúcuta – Calle 10 No 4-38 - PBX 57-7-5880110 / 5880111
+                            <br>E-mail: <a href="mailto:cindoccc@cccucuta.org.co" target="_blank">cindoccc@cccucuta.org.co</a> / <a href="https://www.cccucuta.org.co/" target="_blank">www.cccucuta.org.co</a><br>
+                            Cúcuta - Norte de Santander - Colombia
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none pb-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+                        <img src="{{asset('img/ccc logo.png')}}" class="img-fluid" alt="">
+
+
+                        {{-- <!-- Links -->
+                        <h5 class="text-uppercase">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>--}}
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <img src="{{asset('img/Logo Alcaldía de Cúcuta Ok.png')}}" class="img-fluid" alt="">
+
+
+                        {{--<!-- Links -->
+                        <h5 class="text-uppercase">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>--}}
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+            <div class="container text-center">
+                <!-- Section: Social media -->
+                <p>Siguenos:</p>
+                <section>
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/camaracucuta" role="button" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/cccucuta" role="button" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/camaracucuta/" role="button" target="_blank"><i class="fab fa-instagram"></i></a>
+                </section>
+                <!-- Section: Social media -->
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2021 Copyright:
+                <a href="#">{{ config('app.name', 'Laravel') }}</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
     </div>
+
 
     <script>
         /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
         particlesJS.load('particles-js', "{{ asset('js/particles.json') }}", function() {
             console.log('callback - particles.js config loaded');
         });
+    </script>
+    <script>
+        var x = document.getElementsByClassName("carousel-item");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].setAttribute("data-interval", "3000");
+        }
     </script>
 </body>
 

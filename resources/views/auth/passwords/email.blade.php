@@ -43,5 +43,6 @@
             </div>
         </div>
     </div>
+    @include('layouts.banner')
 </div>
 @endsection
