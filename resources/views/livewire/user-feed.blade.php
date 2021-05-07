@@ -3,7 +3,7 @@
         <div class="card-body">
             <h5 class="card-title">Haz un nuevo Post</h5>
             <div class="my-2">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required>Que estas pensando?</textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="280" wire:model.lazy="newPost" required placeholder="Que estas Pensando?"></textarea>
 
                 @if ($photo)
                 Previsualizacion de foto:
@@ -55,8 +55,17 @@
                     <span class="username"><a href="{{ url('usuario/'.$post->user->id) }}">{{$post->user->name}}</a></span>
                     <span class="description">Compartio - {{ $post->created_at->diffForHumans()}}</span>
                 </div>
+                @if($post->user->id==Auth::user()->id || Auth::user()->rol=='administrador')
+                <a href="#" class="float-right btn-tool" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                    <button class="dropdown-item" onclick="confirm('¿Quieres Borrar el Post?')|| event.stopImmediatePropagation()" wire:click="delete({{ $post->id }})">Eliminar</button>
+
+                    {{--<a class="dropdown-item" href="#">Reportar</a>--}}
+                </div>
+                @endif
                 <!-- /.user-block -->
-                <div class="card-tools">
+                {{--<div class="card-tools">
                     <button type="button" class="btn btn-tool" title="Mark as read">
                         <i class="far fa-circle"></i>
                     </button>
@@ -66,7 +75,7 @@
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
                         <i class="fas fa-times"></i>
                     </button>
-                </div>
+                </div>--}}
                 <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
@@ -118,6 +127,15 @@
                     <div class="comment-text">
                         <span class="username">
                             <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>
+                            @if($comment->user->id==Auth::user()->id || Auth::user()->rol=='administrador'|| $comment->post->user->id==Auth::user()->id)
+                            <a href="#" class="float-right btn-tool" id="dropdownMenuButtonComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonComment">
+
+                                <button class="dropdown-item" onclick="confirm('¿Quieres Borrar el Comentario?')|| event.stopImmediatePropagation()" wire:click="deleteComment({{ $comment->id }})">Eliminar Comentario</button>
+
+                                {{--<a class="dropdown-item" href="#">Reportar</a>--}}
+                            </div>
+                            @endif
                             <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
                         </span><!-- /.username -->
                         {{$comment->content}}

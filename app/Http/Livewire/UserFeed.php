@@ -22,7 +22,7 @@ class UserFeed extends Component
 
     public $initialPosts;
 
-    public $newPost = 'Que estas pensando?';
+    public $newPost = '';
 
     public $user;
     public $limitPerPage = 3;
@@ -35,6 +35,14 @@ class UserFeed extends Component
     public function loadMore()
     {
         $this->limitPerPage = $this->limitPerPage + 3;
+    }
+
+    public function deleteComment($currentComment){
+        Comment::find($currentComment)->delete();
+    }
+
+    public function delete($currentPost){
+        Post::find($currentPost)->delete();
     }
 
     public function addComment($currentPost)
@@ -99,7 +107,7 @@ class UserFeed extends Component
             $this->emit('postAdded');
         }
 
-        $this->newPost = 'Que estas pensando?';
+        $this->newPost = '';
         $this->emit('officialPostAdded');
     }
 

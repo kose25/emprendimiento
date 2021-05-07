@@ -75,6 +75,10 @@ Route::get('sectores', function () {
     return view('sectores');
 })->middleware('role:administrador');
 
+Route::get('actividades', function () {
+    return view('actividades');
+})->middleware('role:administrador');
+
 Route::get('changepassword', function () {
     return view('change-password');
 })->middleware('auth');

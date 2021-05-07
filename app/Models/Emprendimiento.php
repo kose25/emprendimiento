@@ -42,4 +42,9 @@ class Emprendimiento extends Model
     {
         return $this->belongsToMany(Sector::class)->withTimestamps();
     }
+
+    public function actividades()
+    {
+        return $this->belongsToMany(Actividad::class);
+    }
 }

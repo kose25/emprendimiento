@@ -45,13 +45,15 @@
             @endif
             <span class="username">
                 <a href="{{ url('usuario/'.$post->user->id) }}">{{$post->user->name}}</a>
+                @if($user->id==Auth::user()->id || Auth::user()->rol=='administrador')
                 <a href="#" class="float-right btn-tool" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @if($user->id==Auth::user()->id || Auth::user()->rol=='administrador')
-                    <button class="dropdown-item" wire:click="delete({{ $post->id }})" onclick="return confirm('¿Quieres Borrar el Post?')">Eliminar</button>
-                    @endif
-                    <a class="dropdown-item" href="#">Reportar</a>
+
+                    <button class="dropdown-item" onclick="confirm('¿Quieres Borrar el Post?')|| event.stopImmediatePropagation()" wire:click="delete({{ $post->id }})">Eliminar</button>
+
+                    {{--<a class="dropdown-item" href="#">Reportar</a>--}}
                 </div>
+                @endif
             </span>
             <span class="description">{{ $post->created_at->diffForHumans()}}</span>
         </div>
@@ -106,6 +108,16 @@
                 <div class="comment-text">
                     <span class="username">
                         <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>
+
+                        @if($comment->user->id==Auth::user()->id || Auth::user()->rol=='administrador'|| $comment->post->user->id==Auth::user()->id)
+                        <a href="#" class="float-right btn-tool" id="dropdownMenuButtonComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonComment">
+
+                            <button class="dropdown-item" onclick="confirm('¿Quieres Borrar el Comentario?')|| event.stopImmediatePropagation()" wire:click="deleteComment({{ $comment->id }})">Eliminar Comentario</button>
+
+                            {{--<a class="dropdown-item" href="#">Reportar</a>--}}
+                        </div>
+                        @endif
                         <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
                     </span><!-- /.username -->
                     {{$comment->content}}

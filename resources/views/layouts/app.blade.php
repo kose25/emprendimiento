@@ -121,8 +121,33 @@
                     <hr class="clearfix w-100 d-md-none pb-3">
 
                     <!-- Grid column -->
-                    <div class="col-md-3 mb-md-0 mb-3">
-                        <img src="{{asset('img/ccc logo.png')}}" class="img-fluid" alt="">
+                    <div class="col-md-2 mb-md-0 mb-3 offset-md-2 d-none d-md-block">
+                        <img src="{{asset('img/LOGO-CAMARA-COMERCIO-BLANCO-2.png')}}" class="img-fluid" alt="">
+
+
+                        {{-- <!-- Links -->
+                        <h5 class="text-uppercase">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>--}}
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-5 mb-md-0 mb-3 offset-1 d-md-none">
+                        <img src="{{asset('img/LOGO-CAMARA-COMERCIO-BLANCO-2.png')}}" class="img-fluid" alt="">
 
 
                         {{-- <!-- Links -->
@@ -147,9 +172,9 @@
                     <!-- Grid column -->
 
                     <!-- Grid column -->
-                    <div class="col-md-3 mb-md-0 mb-3">
+                    <div class="col-md-2 mb-md-0 mb-3 d-none d-md-block">
 
-                        <img src="{{asset('img/Logo Alcaldía de Cúcuta Ok.png')}}" class="img-fluid" alt="">
+                        <img src="{{asset('img/LOGO-ALCALDIA---BLANCO.png')}}" class="img-fluid" alt="">
 
 
                         {{--<!-- Links -->
@@ -172,6 +197,30 @@
 
                     </div>
                     <!-- Grid column -->
+                    <div class="col-5 mb-md-0 mb-3 d-md-none">
+
+                        <img src="{{asset('img/LOGO-ALCALDIA---BLANCO.png')}}" class="img-fluid" alt="">
+
+
+                        {{--<!-- Links -->
+                        <h5 class="text-uppercase">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>--}}
+
+                    </div>
 
                 </div>
                 <!-- Grid row -->

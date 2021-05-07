@@ -3,25 +3,29 @@
     <div class="card card-widget">
         <div class="card-header">
             <div class="user-block">
-                <img class="img-circle" src="https://picsum.photos/128" alt="User Image">
                 @if($post->user->rol=='administrador')
+                <img class="img-circle" src="{{asset('img/logo2pnglg.png')}}" alt="User Image">
                 <span class="username"><a href="#">Red Regional de Emprendimiento</a></span>
+                @elseif($post->user->foto)
+                <img class="img-circle" src="{{asset('storage').'/'.$post->user->foto}}" alt="user image">
+                <span class="username"><a href="{{ url('usuario/'.$post->user->id) }}">{{$post->user->name}}</a></span>
                 @else
-                <span class="username"><a href="#">{{$post->user->name}}</a></span>
+                <img class="img-circle" src="{{asset('img/profilepic placeholder.jpg')}}" alt="user image">
+                <span class="username"><a href="{{ url('usuario/'.$post->user->id) }}">{{$post->user->name}}</a></span>
                 @endif
                 <span class="description">Compartio - {{ $post->created_at->diffForHumans()}}</span>
             </div>
             <!-- /.user-block -->
             <div class="card-tools">
-                <button type="button" class="btn btn-tool" title="Mark as read">
+                {{--<button type="button" class="btn btn-tool" title="Mark as read">
                     <i class="far fa-circle"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                </button>--}}
+                {{--<button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                </button>--}}
+                {{--<button type="button" class="btn btn-tool" data-card-widget="remove">
                     <i class="fas fa-times"></i>
-                </button>
+                </button>--}}
             </div>
             <!-- /.card-tools -->
         </div>
@@ -68,7 +72,9 @@
             <div class="card-comment">
                 <!-- User image -->
                 @if($comment->user->foto && $comment->user->rol!='administrador')
-                <img class="img-circle img-sm" src="{{asset('storage').'/'.$comment->user->foto}}" alt="User Image">                
+                <img class="img-circle img-sm" src="{{asset('storage').'/'.$comment->user->foto}}" alt="User Image">
+                @elseif($comment->user->rol='administrador')
+                <img class="img-circle img-sm" src="{{asset('img/logo2pnglg.png')}}" alt="User Image">
                 @else
                 <img class="img-circle img-sm" src="{{asset('img/profilepic placeholder.jpg')}}" alt="User Image">
                 @endif
@@ -79,6 +85,15 @@
                         Regional de Emprendimiento
                         @else
                         <a href="{{ url('usuario/'.$comment->user->id) }}">{{$comment->user->name}}</a>
+                        @endif
+                        @if($comment->user->id==Auth::user()->id || Auth::user()->rol=='administrador'|| $comment->post->user->id==Auth::user()->id)
+                        <a href="#" class="float-right btn-tool" id="dropdownMenuButtonComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonComment">
+
+                            <button class="dropdown-item" onclick="confirm('¿Quieres Borrar el Comentario?')|| event.stopImmediatePropagation()" wire:click="deleteComment({{ $comment->id }})">Eliminar Comentario</button>
+
+                            {{--<a class="dropdown-item" href="#">Reportar</a>--}}
+                        </div>
                         @endif
                         <span class="text-muted float-right">{{$comment->created_at->diffForHumans()}}</span>
                     </span><!-- /.username -->

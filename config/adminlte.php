@@ -333,6 +333,12 @@ return [
             'can'  => 'admin',
         ],
         [
+            'text' => 'Actividades Economicas',
+            'url'  => '/actividades',
+            'icon' => 'fas fa-briefcase',
+            'can'  => 'admin',
+        ],
+        [
             'text' => 'Correo Masivo',
             'url'  => '/sendemail',
             'icon' => 'far fa-envelope',

@@ -25,6 +25,9 @@ class OfficialFeed extends Component
         //$this->posts[$index]->comments->push($createdComment);
         $this->newComment = '';
     }
+    public function deleteComment($currentComment){
+        Comment::find($currentComment)->delete();
+    }
 
     public function hitLike($currentPost)
     {
