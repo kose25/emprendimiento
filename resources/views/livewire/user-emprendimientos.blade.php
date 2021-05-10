@@ -108,6 +108,13 @@
                             <p>{{ $showEmprendimiento->sectores->implode('nombre', ', ') }}</p>
 
                         </div>
+                        <div class="col-6">
+                            <b>Actividades Economicas:</b>
+                            <br>
+                            <p>{{--$showEmprendimiento->actividad->nombre--}}</p>
+                            <p>{{ $showEmprendimiento->actividades->implode('nombre', ', ') }}</p>
+
+                        </div>
 
                     </div>
                     @endif
@@ -179,9 +186,19 @@
                         <div class="form-group">
                             <label for="sectorxdxd">Sector</label>
                             <div wire:ignore>
-                                <select class="selectpicker" name="sector" required id="sectorxdxd" wire:model.defer="sectorxd" multiple data-live-search="true" title="Elige 1 o hasta 3 sectores" data-width="75%">
+                                <select class="selectpicker" name="sector" required id="sectorxdxd" wire:model.defer="sectorxd" multiple data-live-search="true" title="Elige 1 o mas sectores" data-width="75%">
                                     @foreach($sectores as $sector)
                                     <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="actividadxdxd">Actividad Economica:</label>
+                            <div wire:ignore>
+                                <select class="selectpicker" name="actividad" required id="actividadxdxd" wire:model.defer="actividadxd" multiple data-live-search="true" title="Elige 1 o mas actividades" data-width="75%">
+                                    @foreach($actividades as $actividad)
+                                    <option value="{{$actividad->id}}">{{$actividad->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -273,6 +290,16 @@
                                 <select class="selectpicker" required id="sectorxdeditf" wire:model.defer="sector" multiple data-width="75%" title="Seleccione 1 o hasta 3 sectores" data-live-search="true">
                                     @foreach($sectores as $sector)
                                     <option value="{{$sector->id}}">{{$sector->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="actividadxdeditf">Actividad Economica:</label>
+                            <div wire:ignore>
+                                <select class="selectpicker" required id="actividadxdeditf" wire:model.defer="actividad" multiple data-width="75%" title="Seleccione mas actividades" data-live-search="true">
+                                    @foreach($actividades as $actividad)
+                                    <option value="{{$actividad->id}}">{{$actividad->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>

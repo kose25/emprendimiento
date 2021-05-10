@@ -145,8 +145,9 @@
 
 @livewireScripts
 <script>
-    Livewire.on('editvaino', function(dato) {
+    Livewire.on('editvaino', function(dato,dato2) {
         $('#sectorxdeditf').selectpicker('val', dato);
+        $('#actividadxdeditf').selectpicker('val', dato2);
     })
 
     Livewire.on('reset', function() {

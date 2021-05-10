@@ -10,7 +10,7 @@
 <h1>Comunicados Oficiales</h1>
 @stop
 @section('content')
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-2 d-none d-md-block">
         <div class="sticky-top mt-4">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -140,7 +140,7 @@
         </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 offset-md-2">
         @if(Auth::user()->rol=='administrador'|| Auth::user()->rol=='entidad')
         <livewire:official-poster />
         @endif

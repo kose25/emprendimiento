@@ -1,6 +1,6 @@
 <div class="row justify-content-center my-4">
     <div class="col-md-8">
-        <img src="{{asset('img/logos.png')}}" alt="" class="img-fluid">
+        <img src="{{asset('img/caja de iconos.png')}}" alt="" class="img-fluid">
     </div>
 </div>
 <div class="row justify-content-center mb-4">

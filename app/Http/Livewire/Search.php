@@ -20,6 +20,7 @@ class Search extends Component
     public $sectores;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    public $showEmprendimiento;
 
     public function mount()
     {
@@ -48,6 +49,12 @@ class Search extends Component
                 break;*/
         }
     }
+
+    public function showEmprendimiento($id)
+    {
+        $this->showEmprendimiento = Emprendimiento::findOrfail($id);
+    }
+
     public function follow($userid)
     {
         if (Follow::where('user_id', Auth::user()->id)->where('follows', $userid)->count() > 0) {

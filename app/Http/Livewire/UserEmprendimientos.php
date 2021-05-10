@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Actividad;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,12 @@ class UserEmprendimientos extends Component
 
     public $sector = [];
 
+    public $actividades;
+
+    public $actividadxd=[];
+
+    public $actividad;
+
     public $entidad = '';
 
     public $foto;
@@ -57,8 +64,9 @@ class UserEmprendimientos extends Component
         $this->celular = $this->editEmprendimiento->celular;
         $this->fechaconstitucion = $this->editEmprendimiento->fechaconstitucion;
         $this->sector = $this->editEmprendimiento->sectores->pluck('id')->toArray();
+        $this->actividad = $this->editEmprendimiento->actividades->pluck('id')->toArray();
         $this->entidad = $this->editEmprendimiento->entidad;
-        $this->emit('editvaino', $this->editEmprendimiento->sectores->pluck('id')->toArray());
+        $this->emit('editvaino', $this->editEmprendimiento->sectores->pluck('id')->toArray(), $this->editEmprendimiento->actividades->pluck('id')->toArray());
     }
 
     public function update()
@@ -88,6 +96,7 @@ class UserEmprendimientos extends Component
         $this->newfoto = null;        
 
         $this->editEmprendimiento->sectores()->sync($this->sector);
+        $this->editEmprendimiento->actividades()->sync($this->actividad);
 
         $this->emit('empUpdated');
     }
@@ -127,15 +136,16 @@ class UserEmprendimientos extends Component
         ]);
 
         $emp->sectores()->sync($this->sectorxd);
+        $emp->actividades()->sync($this->actividadxd);
         $this->emit('emprendimiento added');
         $this->emit('reset');
 
-        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad', 'sectorxd']);
+        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad', 'sectorxd', 'actividadxd']);
     }
 
     public function cerrar()
     {
-        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad','sectorxd']);
+        $this->reset(['nombre', 'descripcion', 'email', 'nit', 'ciudad', 'foto', 'celular', 'fechaconstitucion', 'sector', 'entidad','sectorxd', 'actividadxd']);
         $this->emit('reset');
     }
 
@@ -150,6 +160,7 @@ class UserEmprendimientos extends Component
         }
         $this->entidades = User::where('rol', 'entidad')->get();
         $this->sectores = Sector::all();
+        $this->actividades=Actividad::all();
         return view('livewire.user-emprendimientos');
     }
 }

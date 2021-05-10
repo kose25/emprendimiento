@@ -120,6 +120,10 @@
                                 <h5>Emprendedor: <a href="{{ url('usuario/'.$emprendimiento->emprendedor->id) }}">{{$emprendimiento->emprendedor->name}}</a></h5>
                                 <p class="mb-0">{{$emprendimiento->descripcion}}</p>
                             </div>
+                            <div class="float-right"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emprendimientoModal" wire:click="showEmprendimiento({{$emprendimiento->id}})">
+                                    Ver Detalles
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,6 +134,88 @@
                 {{$emprendimientos->links()}}
             </div>
             @endif
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="emprendimientoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="w-100">
+                        @if($showEmprendimiento)
+                        <h5 class="modal-title text-center" id="exampleModalLabel">{{$showEmprendimiento->nombre}}</h5>
+                        @endif
+                    </div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    @if($showEmprendimiento)
+                    <div class="row justify-content-center">
+                        <div class="col-sm-6 col-5">
+                            @if($showEmprendimiento->foto)
+                            <img class="img-fluid profile-user-img w-100" src="{{asset('storage').'/'.$showEmprendimiento->foto}}" alt="Photo">
+                            @else
+                            <img class="img-fluid profile-user-img w-100" src="{{asset('img/emprendimiento.png')}}" alt="Photo">
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-6">
+                            <b>Descripcion:</b>
+                            <br>
+                            <p>{{$showEmprendimiento->descripcion}}</p>
+                        </div>
+                        <div class="col-6">
+                            <b>Email:</b>
+                            <br>
+                            <p>{{$showEmprendimiento->email}}</p>
+                        </div>
+                        <div class="col-6">
+                            <b>NIT:</b>
+                            <br>
+                            <p>{{$showEmprendimiento->nit}}</p>
+                        </div>
+                        <div class="col-6">
+                            <b>Ciudad:</b>
+                            <br>
+                            <p>{{$showEmprendimiento->ciudad}}</p>
+                        </div>
+                        <div class="col-6">
+                            <b>Celular:</b>
+                            <br>
+                            <p>{{$showEmprendimiento->celular}}</p>
+                        </div>
+                        <div class="col-6">
+                            <b>Fecha Constitucion:</b>
+                            <br>
+                            <p>{{$showEmprendimiento->fechaconstitucion}}</p>
+                        </div>
+                        <div class="col-6">
+                            <b>Sectores:</b>
+                            <br>
+                            <p>{{--$showEmprendimiento->sector->nombre--}}</p>
+                            <p>{{ $showEmprendimiento->sectores->implode('nombre', ', ') }}</p>
+
+                        </div>
+                        <div class="col-6">
+                            <b>Actividades Economicas:</b>
+                            <br>
+                            <p>{{--$showEmprendimiento->actividad->nombre--}}</p>
+                            <p>{{ $showEmprendimiento->actividades->implode('nombre', ', ') }}</p>
+
+                        </div>
+
+                    </div>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
     @endif
