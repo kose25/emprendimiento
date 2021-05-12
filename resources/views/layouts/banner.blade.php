@@ -1,6 +1,6 @@
 <div class="row justify-content-center my-4">
     <div class="col-md-8">
-        <img src="{{asset('img/caja de iconos.png')}}" alt="" class="img-fluid">
+        <img src="{{asset('img/logos2.png')}}" alt="" class="img-fluid">
     </div>
 </div>
 <div class="row justify-content-center mb-4">
@@ -44,7 +44,7 @@
                                 <img src="{{asset('img/slider/sena.png')}}" class="img-fluid" alt="...">
                             </div>
                             <div class="col-4 text-center">
-                                <img src="{{asset('img/slider/SOLO LOG OPORTUNIDADES(1).png')}}" class="img-fluid" alt="...">
+                                <img src="{{asset('img/slider/logo fesc.png')}}" class="img-fluid" alt="...">
                             </div>
                             <div class="col-4 text-center">
                                 <img src="{{asset('img/slider/UA Norte logo.jpg')}}" class="img-fluid" alt="...">
