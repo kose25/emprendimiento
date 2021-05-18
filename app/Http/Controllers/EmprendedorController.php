@@ -139,6 +139,6 @@ class EmprendedorController extends Controller
         }
         User::destroy($id);
         //return redirect('emprendedor')->with('mensaje', 'emprendedor eliminado con exito');
-        return redirect()->back()->with('mensaje', 'Emprendedor eliminado con exito');
+        return redirect()->back()->with('mensaje', $emprendedor->rol . ' eliminado con exito');
     }
 }

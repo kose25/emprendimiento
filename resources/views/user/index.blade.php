@@ -20,7 +20,7 @@
 </div>
 @endif
 
-<h1>lista de Usuarios</h1>
+<h1>Lista de Usuarios</h1>
 
 <div class="card">
     <div class="card-header">
@@ -50,7 +50,8 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Rol</th>
-                    <th>accion</th>
+                    <th>Perfil</th>
+                    <th>accion</th>                    
                 </tr>
             </thead>
             <tbody>
@@ -60,17 +61,18 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->rol }}</td>
+                    <td><a href="{{url('/usuario/'.$user->id)}}">ir al perfil</a></td>
                     <!-- <td>@if(isset($user->foto))
                             <a href="{{ asset('storage').'/'.$user->foto}}" target="_blank">ver foto</a>
                             @else
                             No tiene foto
                             @endif
                         </td> -->
-                    <td><a href="{{ url('/usuario/'.$user->id.'/edit') }}">Editar</a> ||
+                    <td><a class="btn btn-warning" href="{{ url('/usuario/'.$user->id.'/edit') }}">Editar</a>
                         <form action="{{ url('/emprendedor/'.$user->id) }}" method="post">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <input type="submit" value="Borrar" onclick="return confirm('¿Quieres Borrar?')">
+                            <input type="submit" class="btn btn-danger" value="Borrar" onclick="return confirm('¿Quieres Borrar?')">
 
                         </form>
                     </td>

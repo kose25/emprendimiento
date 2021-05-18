@@ -19,10 +19,10 @@ class CorreoMasivo extends Component
     public function send()
     {
         //$this->emit('enviando correos');
-        $users = User::latest()->limit(10)->get();
+        $users = User::latest()->get();
         $correo = new CM($this->subject, $this->body);
         //Mail::to($this->email)->send($correo);
-        dd($this->body);
+        //dd($this->body);
 
         foreach ($users as $user) {
             Mail::to($user->email)->send(new CM($this->subject, $this->body));

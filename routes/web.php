@@ -33,10 +33,15 @@ Route::resource('emprendimiento', EmprendimientoController::class)->middleware('
 Route::resource('emprendedor', EmprendedorController::class)->middleware('auth');
 Route::resource('entidad', EntidadController::class)->middleware('auth');
 Route::resource('funcionario', FuncionarioController::class)->middleware('auth');
-Route::resource('usuario', UserController::class)->middleware('auth');
+Route::get('/usuario/{id}', [UserController::class, 'show'])->middleware('auth');
+//Route::resource('usuario', UserController::class)->middleware('auth');
 Route::get('/user/{rol}', [App\Http\Controllers\UserController::class, 'profile'])->middleware('auth');
 //Auth::routes(['registrer'=>false, 'reset'=>false]);
 Auth::routes();
+Route::middleware('role:administrador,entidad')->group(function () {
+    Route::get('/usuario/{id}/edit', [UserController::class, 'edit']);
+    Route::get('/usuario', [UserController::class, 'index']);
+});
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/home', [EmprendimientoController::class, 'index'])->name('home');

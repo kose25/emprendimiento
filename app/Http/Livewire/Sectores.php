@@ -27,7 +27,7 @@ class Sectores extends Component
         Sector::destroy($id);
         foreach ($emp as $e) {
             if ($e->sectores->count() == 0) {
-                $e->sectores()->sync(17);
+                $e->sectores()->sync(1);
             }
         }
         $this->emit('sector borrado');
@@ -49,7 +49,7 @@ class Sectores extends Component
 
     public function render()
     {
-        $this->sectores = Sector::whereNotIn('id', [17])->get();
+        $this->sectores = Sector::whereNotIn('id', [1])->get();
         return view('livewire.sectores');
     }
 }

@@ -11,7 +11,7 @@ class ProfileInfo extends Component
 {
     use WithFileUploads;
     public $user;
-    public $foto, $apellidos, $date, $celular, $nombre, $sexo, $aboutme;
+    public $foto, $apellidos, $date, $celular, $nombre, $sexo, $aboutme, $direccion;
 
     public function resizePhoto($photopath)
     {
@@ -27,6 +27,7 @@ class ProfileInfo extends Component
         $this->celular = $user->celular;
         $this->sexo = $user->sexo;
         $this->aboutme = $user->aboutme;
+        $this->direccion = $user->direccion;
     }
 
     public function save()
@@ -38,14 +39,16 @@ class ProfileInfo extends Component
             User::where('id', $this->user->id)->update([
                 'name' => trim($this->nombre), 'apellidos' => trim($this->apellidos),
                 'fechanacimiento' => $this->date, 'celular' => $this->celular, 'sexo' => $this->sexo,
-                'foto' => $fotico, 'aboutme' => $this->aboutme
+                'foto' => $fotico, 'aboutme' => $this->aboutme,
+                'direccion' => $this->direccion,
 
             ]);
         } else {
             User::where('id', $this->user->id)->update([
                 'name' => trim($this->nombre), 'apellidos' => trim($this->apellidos),
                 'fechanacimiento' => $this->date, 'celular' => $this->celular, 'sexo' => $this->sexo,
-                'aboutme' => $this->aboutme
+                'aboutme' => $this->aboutme,
+                'direccion' => $this->direccion,
 
             ]);
         }

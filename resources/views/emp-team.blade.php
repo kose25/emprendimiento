@@ -10,7 +10,7 @@
 <h1>Tus Emprendimientos</h1>
 @stop
 @section('content')
-<h1>Contenido</h1>
+{{--<h1>Contenido</h1>--}}
 <div class="row justify-content-md-center">
     <div class="col-md-8">
         <livewire:emp-management />

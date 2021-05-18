@@ -344,12 +344,12 @@ return [
             'icon' => 'far fa-envelope',
             'can'  => 'admin',
         ],
-        [
+        /*[
             'text' => 'Informes',
             'url'  => '/',
             'icon' => 'far fa-file-alt',
             'can'  => 'admin',
-        ],
+        ],*/
         [
             'text' => 'Cambiar contraseña',
             'url'  => '/changepassword',

@@ -89,7 +89,10 @@ class Search extends Component
                     break;
                 case 'funcionario':
                     $result = User::where('rol', 'funcionario')
-                        ->where('name', 'like', '%' . $this->search . '%')->paginate(5);
+                        ->where(function ($query) {
+                            $query->where(DB::raw("CONCAT(name,' ',apellidos)"), 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('apellidos', 'like', '%' . $this->search);
+                        })->paginate(5);
                     break;
                 case 'entidad':
                     $result = User::where('rol', 'entidad')

@@ -70,9 +70,11 @@ class FuncionarioController extends Controller
 
         //FuncionarioEntidadDB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle'])
 
-        User::insert($datosFuncionario);
+        $func=User::create($datosFuncionario);
+        //dd($func);
 
-        $id = DB::getPdo()->lastInsertId();
+        //$id = DB::getPdo()->lastInsertId();
+        $id=$func->id;
         $funent['funcionario'] = $id;
         $funent['entidad'] = $request['entidad'];
 
@@ -84,7 +86,7 @@ class FuncionarioController extends Controller
         if (Auth::user()->rol == 'administrador') {
             return redirect('usuario')->with('mensaje', 'Funcionario creado con exito');
         } else {
-            return redirect('funcionario')->with('mensaje', 'Funcionario creado con exito');
+            return redirect('usuario')->with('mensaje', 'Funcionario creado con exito');
         }
         //return redirect('funcionario')->with('mensaje', 'Funcionario creado con exito');
     }

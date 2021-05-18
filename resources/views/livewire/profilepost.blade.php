@@ -89,7 +89,7 @@
             <!-- <a href="#" class="link-black text-sm"><i class=""></i> Like</a> -->
             <span class="float-right">
                 <a href="#" class="link-black text-sm">
-                    <i class="far fa-comments mr-1"></i> Comments ({{count($post->comments)}})
+                    <i class="far fa-comments mr-1"></i> Comentarios ({{count($post->comments)}})
                 </a>
             </span>
         </p>

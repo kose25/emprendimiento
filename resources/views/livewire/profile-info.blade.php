@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    @if(!($user->rol=='entidad'))
     <b>Nombre:</b>
     <p>{{$user->name}}</p>
     <b>Apellidos:</b>
@@ -13,6 +14,19 @@
     <p>{{$user->email}}</p>
     <b>Cargo:</b>
     <p>{{$user->rol}}</p>
+    @else
+    <b>Nombre:</b>
+    <p>{{$user->name}}</p>
+    <b>Celular:</b>
+    <p>{{$user->celular}}</p>
+    <b>Correo:</b>
+    <p>{{$user->email}}</p>
+    <b>Direccion:</b>
+    <p>{{$user->direccion}}</p>
+    <b>Cargo:</b>
+    <p>{{$user->rol}}</p>
+    @endif
+
 
     @if(Auth::user()->id==$user->id)
     <button type="button" class="btn btn-primary ml-4" data-toggle="modal" data-target="#profileModal" wire:click="edit"> Editar</button>
@@ -56,16 +70,19 @@
                             <label for="nombre">Nombre:</label>
                             <input type="Text" class="form-control" id="nombre" aria-describedby="emailHelp" wire:model.defer="nombre" placeholder="Ingrese su nombre" required>
                         </div>
+                        @if(!($user->rol=='entidad'))
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
                             <input type="text" class="form-control" id="apellidos" aria-describedby="emailHelp" wire:model.defer="apellidos" placeholder="Ingrese sus apellidos" required>
 
                         </div>
+                        @endif
                         <div class="form-group">
-                            <label for="celular">Celular</label>
-                            <input pattern="[0-9]{10}" class="form-control" id="celular" aria-describedby="emailHelp" wire:model.defer="celular" placeholder="Ingrese su numero de celular" type="tel" required>
+                            <label for="celularuser">Celular</label>
+                            <input pattern="[0-9]{10}" class="form-control" id="celularuser" aria-describedby="emailHelp" wire:model.defer="celular" placeholder="Ingrese su numero de celular" type="tel" required>
 
                         </div>
+                        @if(!($user->rol=='entidad'))
                         <div class="form-group">
                             <label for="sexo">Sexo</label>
                             <select class="custom-select" name="sexo" required id="sexo" wire:model.defer="sexo">
@@ -76,10 +93,18 @@
                             </select>
                         </div>
 
+
                         <div class="form-group">
                             <label for="fechanacimiento">Fecha de Nacimiento</label>
                             <input type="date" class="form-control" id="fechanacimiento" autofocus placeholder="Fecha de Nacimiento" wire:model.defer="date">
                         </div>
+                        @endif
+                        @if($user->rol=='entidad')
+                        <div class="form-group">
+                            <label for="direccion">Direccion:</label>
+                            <input type="Text" class="form-control" id="direccion" wire:model.defer="direccion" placeholder="Ingrese su direccion" required>
+                        </div>
+                        @endif
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Sobre Mi:</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model.defer="aboutme" maxlength="280"></textarea>

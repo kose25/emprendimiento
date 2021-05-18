@@ -93,9 +93,14 @@
                                 <p>{{$showEmprendimiento->fechaconstitucion}}</p>
                             </div>
                             <div class="col-6">
-                                <b>Sector:</b>
+                                <b>Sectores:</b>
                                 <br>
-                                <p>{{$showEmprendimiento->sector}}</p>
+                                <p>{{ $showEmprendimiento->sectores->implode('nombre', ', ') }}</p>
+                            </div>
+                            <div class="col-6">
+                                <b>Actividades Economicas:</b>
+                                <br>
+                                <p>{{ $showEmprendimiento->actividades->implode('nombre', ', ') }}</p>
                             </div>
 
                         </div>
@@ -114,8 +119,10 @@
 
     @if($selectedEmp)
 
-    <button class="btn btn-primary" type="button" wire:click="setEmp">Atras</button>
-    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AgregarEmprendedor">Agregar Integrante</button>
+    <h1>{{$selectedEmp->nombre}}</h1>
+
+    <button class="btn btn-secondary" type="button" wire:click="setEmp">Atras</button>
+    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#AgregarEmprendedor">Agregar Integrante</button>
     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#crearEmprendedor">Crear Integrante</button>
     <!-- Modal -->
     <div class="modal fade" id="AgregarEmprendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -170,7 +177,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -212,7 +219,7 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table my-4">
         <thead>
             <tr>
                 <th scope="col">#</th>

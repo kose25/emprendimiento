@@ -49,10 +49,18 @@
 
     <div class="col-md-4 py-2">
         <select class="custom-select" name="sexo" required>
+            @if(!isset($emprendedor) || !$emprendedor->sexo)
             <option value="" disabled selected>Sexo</option>
             <option value="masculino">Masculino</option>
             <option value="femenino">Femenino</option>
             <option value="otro">Otro</option>
+            @else
+            <option value="" disabled>Sexo</option>
+            <option value="masculino" {{ $emprendedor->sexo == 'masculino' ? 'selected' : '' }}>Masculino</option>
+            <option value="femenino" {{ $emprendedor->sexo == 'femenino' ? 'selected' : '' }}>Femenino</option>
+            <option value="otro" {{ $emprendedor->sexo == 'otro' ? 'selected' : '' }}>Otro</option>
+            @endif
+
         </select>
     </div>
 </div>

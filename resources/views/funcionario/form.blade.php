@@ -24,10 +24,10 @@
 <div class="form-group row">
 
     <div class="col-md-4 py-2">
-        <input type="text" class="form-control" name="nit" value="{{ isset($funcionario->nit)?$funcionario->nit:'' }}" required autocomplete="name" autofocus placeholder="NIT">
+        <input type="text" class="form-control" name="nit" value="{{ isset($funcionario->nit)?$funcionario->nit:'' }}" autocomplete="name" autofocus placeholder="NIT">
     </div>
     <div class="col-md-4 py-2">
-        <input type="text" class="form-control" name="name" value="{{ isset($funcionario->name)?$funcionario->name:'' }}" autofocus placeholder="Nombre">
+        <input type="text" class="form-control" name="name" value="{{ isset($funcionario->name)?$funcionario->name:'' }}" autofocus placeholder="Nombre" required>
     </div>
     <div class="col-md-4 py-2">
         <input type="text" class="form-control" name="direccion" value="{{ isset($funcionario->direccion)?$funcionario->direccion:'' }}" autofocus placeholder="Direccion">
@@ -36,11 +36,11 @@
 
 <div class="form-group row">
     <div class="col-md-4 py-2">
-        <input id="celular" type="text" class="form-control " name="celular" value="{{ isset($funcionario->celular)?$funcionario->celular:'' }}" required autocomplete="celular" placeholder="Celular">
+        <input id="celular" type="text" class="form-control " name="celular" value="{{ isset($funcionario->celular)?$funcionario->celular:'' }}"  autocomplete="celular" placeholder="Celular">
     </div>
 
     <div class="col-md-4 py-2">
-        <input type="text" class="form-control" name="email" value="{{ isset($funcionario->email)?$funcionario->email:'' }}" autofocus placeholder="Email">
+        <input type="text" class="form-control" name="email" value="{{ isset($funcionario->email)?$funcionario->email:'' }}" autofocus placeholder="Email" required>
     </div>
 
     <div class="col-md-4 py-2">

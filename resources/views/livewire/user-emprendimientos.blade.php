@@ -32,7 +32,7 @@
                     </div>
                     @if(Auth::User()->id==$user->id)
                     <div class="float-right mr-2">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEmprendimiento" wire:click="edit({{$emprendimiento->id}})">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editEmprendimiento" wire:click="edit({{$emprendimiento->id}})">
                             Editar
                         </button>
                     </div>
@@ -159,25 +159,25 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nombre">Nombre:</label>
-                            <input type="Text" class="form-control" id="nombre" aria-describedby="emailHelp" wire:model="nombre" placeholder="Ingrese Nombre del Emprendimiento" required="" name="name">
+                            <label for="nombre_emp_create">Nombre:</label>
+                            <input type="Text" class="form-control" id="nombre_emp_create" aria-describedby="emailHelp" wire:model="nombre" placeholder="Ingrese Nombre del Emprendimiento" required="" name="name">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Descripcion:</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model.defer="descripcion" maxlength="300" required name="description"></textarea>
+                            <label for="createempdesc">Descripcion:</label>
+                            <textarea class="form-control" id="createempdesc" rows="3" wire:model.defer="descripcion" maxlength="300" required name="description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email de emprendimiento:</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model.defer="email" placeholder="Ingrese email" required name="email">
+                            <label for="emailcreate">Email de emprendimiento:</label>
+                            <input type="email" class="form-control" id="emailcreate" aria-describedby="emailHelp" wire:model.defer="email" placeholder="Ingrese email" required name="email">
                         </div>
                         <div class="form-group">
-                            <label for="nit">NIT:</label>
-                            <input type="text" class="form-control" id="nit" aria-describedby="emailHelp" wire:model.defer="nit" placeholder="Ingrese nit" required name="nit">
+                            <label for="nitcreate">NIT:</label>
+                            <input type="text" class="form-control" id="nitcreate" aria-describedby="emailHelp" wire:model.defer="nit" placeholder="Ingrese nit" required name="nit">
                         </div>
                         <div class="form-group">
-                            <label for="ciudad">Ciudad:</label>
-                            <input type="text" class="form-control" id="ciudad" aria-describedby="emailHelp" wire:model.defer="ciudad" placeholder="Ingrese Ciudad" required name="city" wire.model.defer="ciudad">
+                            <label for="ciudadcreate">Ciudad:</label>
+                            <input type="text" class="form-control" id="ciudadcreate" aria-describedby="emailHelp" wire:model.defer="ciudad" placeholder="Ingrese Ciudad" required name="city" wire.model.defer="ciudad">
                         </div>
                         <div class="form-group">
                             <label for="celular">Celular:</label>
@@ -204,8 +204,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="sector">Entidad</label>
-                            <select class="custom-select" name="entidad" required id="entidad" wire:model.defer="entidad" name="entidad">
+                            <label for="entidadcreate">Entidad</label>
+                            <select class="custom-select" name="entidad" required id="entidadcreate" wire:model.defer="entidad" name="entidad">
                                 <option value="" disabled="" selected="">Entidad</option>
                                 @foreach($entidades as $entidad)
                                 <option value="{{$entidad->id}}">{{$entidad->name}}</option>
@@ -214,8 +214,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fechaconstitucion">Fecha de Constitucion</label>
-                            <input type="date" class="form-control" id="fechaconstitucion" autofocus="" placeholder="Fecha de constitucion" wire:model.defer="fechaconstitucion">
+                            <label for="fechaconstitucioncreate">Fecha de Constitucion</label>
+                            <input type="date" class="form-control" id="fechaconstitucioncreate" autofocus="" placeholder="Fecha de constitucion" wire:model.defer="fechaconstitucion">
                         </div>
                     </form>
                 </div>
@@ -258,14 +258,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nombre">Nombre:</label>
-                            <input type="Text" class="form-control" id="nombre" aria-describedby="emailHelp" wire:model="nombre" placeholder="Ingrese Nombre del Emprendimiento" required="" name="name">
+                            <label for="nombre_emp_edit">Nombre:</label>
+                            <input type="Text" class="form-control" id="nombre_emp_edit" aria-describedby="emailHelp" wire:model="nombre" placeholder="Ingrese Nombre del Emprendimiento" required="" name="name">
 
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Descripcion:</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model.defer="descripcion" maxlength="300" required name="description"></textarea>
+                            <label for="editempdesc">Descripcion:</label>
+                            <textarea class="form-control" id="editempdesc" rows="3" wire:model.defer="descripcion" maxlength="300" required name="description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="email">Email de emprendimiento:</label>
